@@ -1,36 +1,52 @@
-import TextType from "../animations/text-type";
+'use client'
 
-export function Topbar(){
+import { SiGithub } from "@icons-pack/react-simple-icons";
+import Linkedin from '../../public/linkedin.svg';
+import TextType from "../animations/text-type";
+import { SocialButton } from "../ui/social-button";
+
+export function Topbar() {
   const typingSpeed = 50
-  
+
   const texts = [
     { text: "> ", className: "italic font-brains text-sm text-blue-500" },
     { text: " Welcome to ", className: "font-brains text-sm text-white" },
     { text: "Renan Santana ", className: "font-brains text-sm text-blue-500" },
     { text: "portfolio", className: "font-brains text-sm text-white", showCursor: true },
-  ]
-  
+  ];
+
   const delays = texts.reduce((acc, curr, idx) => {
     if (idx === 0) return [0];
     return [...acc, acc[idx - 1] + (texts[idx - 1].text.length * typingSpeed)];
   }, [] as number[])
-  
-  return(
-    <header className="w-full flex flex-row border-b border-b-white/25 p-4">
+
+  return (
+    <header className="w-full flex flex-row justify-between items-center border-b border-b-white/25 p-4">
       <div className="flex flex-row">
         {texts.map((item, idx) => (
-          <TextType 
+          <TextType
             key={idx}
-            text={item.text} 
-            showCursor={item.showCursor ?? false} 
-            loop={false} 
+            text={item.text}
+            showCursor={item.showCursor ?? false}
+            loop={false}
             className={item.className}
             initialDelay={delays[idx]}
           />
         ))}
       </div>
-      <div>
-        
+
+      <div className="flex gap-3">
+        <SocialButton.Root href="https://www.linkedin.com/in/renan-santana007">
+          <SocialButton.Background className="bg-linear-to-r from-blue-300 to-blue-800" />
+          <SocialButton.Icon icon={Linkedin} text="LinkedIn" isSvg={true} />
+          <SocialButton.Text>LinkedIn</SocialButton.Text>
+        </SocialButton.Root>
+
+        <SocialButton.Root href="https://github.com/RenanTheFato">
+          <SocialButton.Background className="bg-linear-to-r from-gray-400 to-white" />
+          <SocialButton.Icon icon={SiGithub} text="GitHub" isSvg={false} iconClassName="w-5 h-5 text-white group-hover:text-black transition-colors" />
+          <SocialButton.Text className="text-white group-hover:text-black transition-colors">GitHub</SocialButton.Text>
+        </SocialButton.Root>
       </div>
     </header>
   )
