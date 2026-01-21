@@ -1,6 +1,6 @@
 'use client'
 
-import { SiGithub } from "@icons-pack/react-simple-icons";
+import { SiGithub, SiGmail } from "@icons-pack/react-simple-icons";
 import Linkedin from '../../public/linkedin.svg';
 import TextType from "../animations/text-type";
 import { SocialButton } from "../ui/social-button";
@@ -9,10 +9,10 @@ export function Topbar() {
   const typingSpeed = 50
 
   const texts = [
-    { text: "> ", className: "italic font-brains text-sm text-blue-500" },
-    { text: " Welcome to ", className: "font-brains text-sm text-white" },
-    { text: "Renan Santana ", className: "font-brains text-sm text-blue-500" },
-    { text: "portfolio", className: "font-brains text-sm text-white", showCursor: true },
+    { text: "> ", className: "italic font-brains text-blue-500" },
+    { text: " Welcome to ", className: "font-brains text-white" },
+    { text: "Renan Santana ", className: "font-brains text-blue-500" },
+    { text: "portfolio", className: "font-brains text-white", showCursor: true },
   ];
 
   const delays = texts.reduce((acc, curr, idx) => {
@@ -37,7 +37,7 @@ export function Topbar() {
 
       <div className="flex gap-3">
         <SocialButton.Root href="https://www.linkedin.com/in/renan-santana007">
-          <SocialButton.Background className="bg-linear-to-r from-blue-300 to-blue-800" />
+          <SocialButton.Background className="bg-linear-to-r from-blue-400 to-blue-800" />
           <SocialButton.Icon icon={Linkedin} text="LinkedIn" isSvg={true} />
           <SocialButton.Text>LinkedIn</SocialButton.Text>
         </SocialButton.Root>
@@ -46,6 +46,12 @@ export function Topbar() {
           <SocialButton.Background className="bg-linear-to-r from-gray-400 to-white" />
           <SocialButton.Icon icon={SiGithub} text="GitHub" isSvg={false} iconClassName="w-5 h-5 text-white group-hover:text-black transition-colors" />
           <SocialButton.Text className="text-white group-hover:text-black transition-colors">GitHub</SocialButton.Text>
+        </SocialButton.Root>
+
+        <SocialButton.Root href="mailto:renan.thefato.dev@gmail.com">
+          <SocialButton.Background className="bg-linear-to-r from-red-800 to-red-950" />
+          <SocialButton.Icon icon={SiGmail} text="GitHub" isSvg={false} iconClassName="w-5 h-5 text-white " />
+          <SocialButton.Text>Email</SocialButton.Text>
         </SocialButton.Root>
       </div>
     </header>
