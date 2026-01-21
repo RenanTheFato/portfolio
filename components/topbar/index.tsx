@@ -1,11 +1,16 @@
 'use client'
 
-import { SiGithub, SiGmail } from "@icons-pack/react-simple-icons";
+import React from "react";
 import Linkedin from '../../public/linkedin.svg';
 import TextType from "../animations/text-type";
 import { SocialButton } from "../ui/social-button";
+import { SiGithub, SiGmail } from "@icons-pack/react-simple-icons";
 
-export function Topbar() {
+interface TopbarProps {
+  onAnimationComplete?: () => void
+}
+
+export function Topbar({ onAnimationComplete }: TopbarProps) {
   const typingSpeed = 50
 
   const texts = [
@@ -17,8 +22,17 @@ export function Topbar() {
 
   const delays = texts.reduce((acc, curr, idx) => {
     if (idx === 0) return [0];
-    return [...acc, acc[idx - 1] + (texts[idx - 1].text.length * typingSpeed)];
+    return [...acc, acc[idx - 1] + (texts[idx - 1].text.length * typingSpeed)]
   }, [] as number[])
+
+  const totalDuration = delays[delays.length - 1] + (texts[texts.length - 1].text.length * typingSpeed)
+  
+  React.useEffect(() => {
+    if (onAnimationComplete) {
+      const timer = setTimeout(onAnimationComplete, totalDuration)
+      return () => clearTimeout(timer)
+    }
+  }, [onAnimationComplete, totalDuration])
 
   return (
     <header className="w-full flex flex-row justify-between items-center border-b border-b-white/25 p-4">
