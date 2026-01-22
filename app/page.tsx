@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from "react";
-import { Terminal } from "@/components/terminal";
+import { PresentationSection } from "@/components/presentation";
 import { Topbar } from "@/components/topbar";
 
 export default function Home() {
@@ -11,7 +11,7 @@ export default function Home() {
     <div className="w-screen h-screen flex flex-col">
       <Topbar onAnimationComplete={() => setTopbarComplete(true)} />
       <main className="flex-1 overflow-hidden">
-        <Terminal startAnimation={topbarComplete} />
+        <PresentationSection startAnimation={topbarComplete} />
       </main>
     </div>
   )
