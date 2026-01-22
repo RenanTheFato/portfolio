@@ -35,7 +35,7 @@ export function Topbar({ onAnimationComplete }: TopbarProps) {
   }, [onAnimationComplete, totalDuration])
 
   return (
-    <header className="w-full flex flex-row justify-between items-center border-b border-b-white/25 p-4">
+    <header className="w-full flex flex-row justify-between items-center border-b border-b-white/25 px-36 py-4">
       <div className="flex flex-row">
         {texts.map((item, idx) => (
           <TextType
