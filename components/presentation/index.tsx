@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import Image from "next/image";
+import { MenuItem } from "../ui/menu-main-item";
 
 interface PresentationSectionProps {
   startAnimation: boolean
@@ -74,11 +75,38 @@ export function PresentationSection({ startAnimation }: PresentationSectionProps
           </div>
         </div>
       ) : (
-        <div className="flex flex-row w-screen h-screen px-36 p-12">
-          <div className="flex flex-col">
-            <Image src={'/avatar.png'} alt="profile pic" width={144} height={144} className="rounded-md" loading="eager"/>
+        <section className="flex flex-row w-screen h-screen px-36 p-12 justify-between">
+          
+          <div className="flex flex-col flex-3">
+            <div className="flex flex-row space-x-6">
+              <Image src={'/avatar.png'} alt="profile pic" width={144} height={144} className="rounded-md" loading="eager" />
+              <section className="flex flex-col">
+                <div className="flex-row flex space-x-4">
+                  <span>My Name:</span>
+                  <span>Renan Santana</span>
+                </div>
+                <div className="flex-row flex space-x-4">
+                  <span>Years of Experience:</span>
+                  <span>4 years</span>
+                </div>
+                <div className="flex-row flex space-x-4">
+                  <span>Scope of Development</span>
+                  <span>FullStack</span>
+                </div>
+              </section>
+            </div>
           </div>
-        </div>
+
+          <div className="flex flex-col flex-1">
+            <section className="flex flex-col space-y-6">
+              <MenuItem label="$ Skills"/>
+              <MenuItem label="$ Projects"/>
+              <MenuItem label="$ Certifications"/>
+              <MenuItem label="$ Contact"/>
+            </section>
+          </div>
+
+        </section>
       )}
     </div>
   )
