@@ -5,13 +5,14 @@ import { gsap } from "gsap";
 import Image from "next/image";
 import { MenuItem } from "../ui/menu-main-item";
 
-import { SiTypescript, SiReact, SiNextdotjs, SiNodedotjs, SiPostgresql, SiDocker, SiGit, SiTailwindcss,
- SiPrisma, SiPython, SiRust, SiGo, SiOpenjdk, SiC } from "@icons-pack/react-simple-icons";
+import { SiTypescript, SiReact, SiNextdotjs, SiNodedotjs, SiPostgresql, SiDocker, SiGit, SiPrisma, 
+SiPython, SiRust, SiGo, SiOpenjdk } from "@icons-pack/react-simple-icons";
+import { FaJava } from "react-icons/fa";
 import { InteractiveGrid, InteractiveGridHandle } from "../animations/squares";
 
 const HARD_SKILLS = [
   { label: "Frontend Development",  desc: "SPAs, SSR, component systems"  },
-  { label: "Backend Development",   desc: "REST, GraphQL, microservices"   },
+  { label: "Backend Development",   desc: "REST, microservices"   },
   { label: "Database Design",       desc: "Relational, migrations, ORMs"   },
   { label: "Cloud & DevOps",        desc: "Docker, CI/CD, deployments"     },
   { label: "API Architecture",      desc: "Design, versioning, contracts"  },
@@ -23,7 +24,7 @@ const LANGUAGES = [
   { icon: SiNodedotjs,  label: "Node.js",    color: "#339933" },
   { icon: SiPython,     label: "Python",     color: "#3776AB" },
   { icon: SiRust,       label: "Rust",       color: "#CE422B" },
-  { icon: SiOpenjdk,    label: "Java",       color: "#FD5200" },
+  { icon: FaJava,       label: "Java",       color: "#ED8B00" },
   { icon: SiGo,         label: "Go",         color: "#00ADD8" },
   { icon: SiReact,      label: "React",      color: "#61DAFB" },
   { icon: SiNextdotjs,  label: "Next.js",    color: "#ffffff" },
@@ -150,7 +151,7 @@ export function PresentationSection({ startAnimation }: PresentationSectionProps
         duration: 0.5,
         onStart: () => {
           const commandLine = document.createElement("div")
-          commandLine.className = "font-brains opacity-0 text-[11px] sm:text-xs text-justify text-nowrap"
+          commandLine.className = "font-brains opacity-0 text-sm lg:text-base sm:text-xs text-justify text-nowrap"
           commandLine.textContent = command
           bootSequenceRef.current?.appendChild(commandLine)
 
