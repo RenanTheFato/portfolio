@@ -5,37 +5,38 @@ import { gsap } from "gsap";
 import Image from "next/image";
 import { MenuItem } from "../ui/menu-main-item";
 
-import { SiTypescript, SiReact, SiNextdotjs, SiNodedotjs, SiPostgresql, SiDocker, SiGit, SiPrisma, 
-SiPython, SiRust, SiGo, SiOpenjdk } from "@icons-pack/react-simple-icons";
+import {
+  SiTypescript, SiReact, SiNextdotjs, SiNodedotjs, SiPostgresql, SiDocker, SiGit, SiPrisma,
+  SiPython, SiRust, SiGo
+} from "@icons-pack/react-simple-icons";
 import { FaJava } from "react-icons/fa";
 import { InteractiveGrid, InteractiveGridHandle } from "../animations/squares";
 
 const HARD_SKILLS = [
-  { label: "Frontend Development",  desc: "SPAs, SSR, component systems"  },
-  { label: "Backend Development",   desc: "REST, microservices"   },
-  { label: "Database Design",       desc: "Relational, migrations, ORMs"   },
-  { label: "Cloud & DevOps",        desc: "Docker, CI/CD, deployments"     },
-  { label: "API Architecture",      desc: "Design, versioning, contracts"  },
-  { label: "System Design",         desc: "Scalability, patterns, DDD"     },
+  { label: "Frontend Development", desc: "SPAs, SSR, component systems" },
+  { label: "Backend Development", desc: "REST, microservices" },
+  { label: "Database Design", desc: "Relational, migrations, ORMs" },
+  { label: "Cloud & DevOps", desc: "Docker, CI/CD, deployments" },
+  { label: "API Architecture", desc: "Design, versioning, contracts" },
+  { label: "System Design", desc: "Scalability, patterns, DDD" },
 ]
 
 const LANGUAGES = [
   { icon: SiTypescript, label: "TypeScript", color: "#3178C6" },
-  { icon: SiNodedotjs,  label: "Node.js",    color: "#339933" },
-  { icon: SiPython,     label: "Python",     color: "#3776AB" },
-  { icon: SiRust,       label: "Rust",       color: "#CE422B" },
-  { icon: FaJava,       label: "Java",       color: "#ED8B00" },
-  { icon: SiGo,         label: "Go",         color: "#00ADD8" },
-  { icon: SiReact,      label: "React",      color: "#61DAFB" },
-  { icon: SiNextdotjs,  label: "Next.js",    color: "#ffffff" },
-  { icon: SiPostgresql, label: "Postgres",   color: "#4169E1" },
-  { icon: SiPrisma,     label: "Prisma",     color: "#ffffff" },
-  { icon: SiDocker,     label: "Docker",     color: "#2496ED" },
-  { icon: SiGit,        label: "Git",        color: "#F05032" },
+  { icon: SiNodedotjs, label: "Node.js", color: "#339933" },
+  { icon: SiPython, label: "Python", color: "#3776AB" },
+  { icon: SiRust, label: "Rust", color: "#CE422B" },
+  { icon: FaJava, label: "Java", color: "#ED8B00" },
+  { icon: SiGo, label: "Go", color: "#00ADD8" },
+  { icon: SiReact, label: "React", color: "#61DAFB" },
+  { icon: SiNextdotjs, label: "Next.js", color: "#ffffff" },
+  { icon: SiPostgresql, label: "Postgres", color: "#4169E1" },
+  { icon: SiPrisma, label: "Prisma", color: "#ffffff" },
+  { icon: SiDocker, label: "Docker", color: "#2496ED" },
+  { icon: SiGit, label: "Git", color: "#F05032" },
 ]
 
 const MENU_ITEMS = ["$ Skills", "$ Projects", "$ Certifications", "$ Contact"]
-
 
 function BurgerMenu() {
   const [open, setOpen] = useState(false)
@@ -114,10 +115,11 @@ function SkillsSection() {
 }
 
 interface PresentationSectionProps {
-  startAnimation: boolean
+  startAnimation: boolean,
+  onAnimationComplete?: () => void
 }
 
-export function PresentationSection({ startAnimation }: PresentationSectionProps) {
+export function PresentationSection({ startAnimation, onAnimationComplete }: PresentationSectionProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const bootSequenceRef = useRef<HTMLDivElement>(null)
   const gridRef = useRef<InteractiveGridHandle>(null)
@@ -166,7 +168,10 @@ export function PresentationSection({ startAnimation }: PresentationSectionProps
                     duration: 1,
                     delay: 0.5,
                     onComplete: () => {
-                      setTimeout(() => setBootAnimationComplete(true), 200)
+                      setTimeout(() => {
+                        setBootAnimationComplete(true)
+                        onAnimationComplete?.()
+                      }, 200)
                     },
                   })
                 }, 200)
@@ -196,7 +201,7 @@ export function PresentationSection({ startAnimation }: PresentationSectionProps
         </div>
       ) : (
         <section className="relative z-10 flex flex-col lg:flex-row justify-start lg:justify-between w-full min-h-full px-6 sm:px-10 lg:px-36
-          py-10 sm:py-10 lg:py-12 gap-8 lg:gap-0 overflow-y-auto">
+          py-10 sm:py-10 lg:py-12 gap-8 lg:gap-0">
 
           <div className="flex flex-col w-full lg:flex-3">
 
