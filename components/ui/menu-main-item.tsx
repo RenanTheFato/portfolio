@@ -72,22 +72,11 @@ export function MenuItem({ label }: MenuItemProps) {
       ref={itemRef}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="
-        relative border border-white rounded-sm cursor-pointer overflow-hidden
-        px-2 py-2.5 sm:py-3 lg:py-4
-        min-w-[100px] sm:min-w-[120px]
-      "
-    >
-      <div
-        ref={solidBgRef}
-        className="absolute inset-0 bg-white"
-        style={{ transform: 'scaleX(0)', transformOrigin: 'left' }}
-      />
+      className=" relative border border-white rounded-sm cursor-pointer overflow-hidden px-2 py-2.5 sm:py-3 lg:py-4 min-w-25 sm:min-w-30">
 
-      <div
-        className="absolute inset-0 grid gap-0.5"
-        style={{ gridTemplateColumns: `repeat(16, minmax(0, 1fr))`, gridTemplateRows: '1fr' }}
-      >
+      <div ref={solidBgRef} className="absolute inset-0 bg-white" style={{ transform: 'scaleX(0)', transformOrigin: 'left' }} />
+
+      <div className="absolute inset-0 grid gap-0.5" style={{ gridTemplateColumns: `repeat(16, minmax(0, 1fr))`, gridTemplateRows: '1fr' }}>
         {createPixelColumns()}
       </div>
 

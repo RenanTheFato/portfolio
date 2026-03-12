@@ -34,13 +34,8 @@ export function Topbar({ onAnimationComplete }: TopbarProps) {
   }, [onAnimationComplete, totalDuration])
 
   return (
-    <header className="
-      w-full flex flex-row items-center justify-between
-      border-b border-b-white/25
-      px-5 sm:px-10 lg:px-36
-      py-3 sm:py-4
-      gap-3
-    ">
+    <header className=" w-full flex flex-row items-center justify-between border-b border-b-white/25 px-5 sm:px-10 lg:px-36
+      py-3 sm:py-4 gap-3">
 
       <span className="inline min-w-0 overflow-hidden text-xs sm:text-sm lg:text-base leading-none">
         {texts.map((item, idx) => (
