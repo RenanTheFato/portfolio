@@ -12,7 +12,7 @@ interface BadgeIconProps {
 
 function Badge({ children, color }: BadgeProps) {
 
-  const bgColor = color ? `${color}33` : "rgba(255,255,255,0.2)"
+  const bgColor = color ? color.replace("hsl(", "hsla(").replace(")", ", 0.2)") : "rgba(255,255,255,0.2)"
 
   return (
     <div className="p-1 flex flex-row space-x-2 rounded-sm border-2 border-white/20" style={{ backgroundColor: bgColor }}>
