@@ -1,9 +1,16 @@
-import { Window } from "../ui/window";
+'use client'
 
-export function Projects(){
+import { Window } from "../ui/window"
+import { Visualizer } from "../ui/visualizer"
+import { ProjectProvider } from "@/contexts/project-context"
+
+export function Projects() {
   return (
-    <div className="relative w-full h-full flex flex-col p-8 bg-black border-t border-t-white/30 overflow-hidden">
-      <Window />
-    </div>
+    <ProjectProvider>
+      <div className="relative w-full h-full flex flex-row p-8 space-x-8 bg-black border-t border-t-white/30 overflow-hidden">
+        <Window />
+        <Visualizer />
+      </div>
+    </ProjectProvider>
   )
 }
