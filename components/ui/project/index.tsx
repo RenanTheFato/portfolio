@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 
 interface ProjectProps {
   children: ReactNode,
+  onClick?: () => void
 }
 
 interface ProjectImageProps {
@@ -10,9 +11,9 @@ interface ProjectImageProps {
   alt?: string
 }
 
-function Project({ children }: ProjectProps) {
+function Project({ children, onClick }: ProjectProps) {
   return (
-    <div className="flex flex-col items-start justify-between border border-white/20 rounded-md overflow-hidden">
+    <div onClick={onClick} className="flex flex-col items-start justify-between border border-white/20 rounded-md overflow-hidden">
       {children}
     </div>
   )
@@ -31,7 +32,7 @@ function ProjectImage({ src, alt }: ProjectImageProps) {
 }
 
 function Title({ children }: ProjectProps) {
-  return <span className="text-white font-brains text-base">{children}</span>
+  return <span className="text-white text-base">{children}</span>
 }
 
 function Badges({ children }: ProjectProps) {
