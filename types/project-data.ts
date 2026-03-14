@@ -7,11 +7,21 @@ export interface TechItem {
   color: string
 }
 
+export interface ProjectLink {
+  url: string
+}
+
+export interface ExternalLinks {
+  github?: ProjectLink,
+  project?: ProjectLink,
+}
+
 export interface ProjectData {
   title: string
   image: string
   alt: string
   description: string
   focus: "frontend" | "backend" | "fullstack"
-  techs: TechItem[]
+  techs: TechItem[],
+  links: ExternalLinks
 }
