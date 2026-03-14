@@ -15,8 +15,8 @@ export function Window() {
     <section className="flex flex-col w-7/12 h-full border-2 border-white/40 rounded-t-lg">
       <div className="w-full h-10 flex items-center flex-row border-b border-b-white/25 rounded-t-2xl shrink-0">
         <VscRootFolder className="mx-4" size={22} />
-        <div className="w-2/12 bg-gray-100/30 h-full rounded-t-lg flex items-center justify-center">
-          <span className="text-white text-sm">Project's Folder</span>
+        <div className="w-3/12 bg-gray-100/30 h-full rounded-t-lg flex items-center justify-center">
+          <span className="text-white text-sm text-nowrap">Project's Folder</span>
         </div>
       </div>
 
