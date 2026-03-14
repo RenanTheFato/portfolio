@@ -14,5 +14,13 @@ export const projects: ProjectData[] = [
       { icon: SiApachemaven, label: "Maven", color: "hsl(350, 77%, 44%)" },
       { icon: SiGnometerminal, label: "CLI", color: "hsl(1, 100%, 100%)" },
     ],
+    links: {
+      github: {
+        url: "https://github.com/RenanTheFato/log-analyzer-cli",
+      },
+      project: {
+        url: "https://github.com/RenanTheFato/log-analyzer-cli"
+      }
+    }
   },
 ]
