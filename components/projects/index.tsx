@@ -7,7 +7,7 @@ import { ProjectProvider } from "@/contexts/project-context"
 export function Projects() {
   return (
     <ProjectProvider>
-      <div className="relative w-full h-full flex flex-row p-8 px-24 space-x-8 bg-black border-t border-t-white/30 overflow-hidden">
+      <div className="relative w-full h-full flex flex-col lg:flex-row p-4 sm:p-6 lg:p-8 lg:px-24 gap-4 sm:gap-6 lg:space-x-8 bg-black border-t border-t-white/30 overflow-hidden">
         <Window />
         <Visualizer />
       </div>
