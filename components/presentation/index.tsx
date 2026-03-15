@@ -82,7 +82,6 @@ function BurgerMenu() {
 function SkillsSection() {
   return (
     <div className="mt-7 flex flex-col gap-6 max-w-sm lg:max-w-lg">
-
       <div className="flex flex-col gap-3">
         <span className="font-brains text-lg lg:text-base text-white font-semibold">Skills</span>
         <div className="grid grid-cols-2 gap-x-6 lg:gap-x-10 gap-y-3 sm:gap-y-2.5 lg:gap-y-4">
@@ -109,20 +108,21 @@ function SkillsSection() {
           ))}
         </div>
       </div>
-
     </div>
   )
 }
 
 interface PresentationSectionProps {
-  startAnimation: boolean,
+  startAnimation: boolean
+  skipAnimation?: boolean
   onAnimationComplete?: () => void
 }
 
-export function PresentationSection({ startAnimation, onAnimationComplete }: PresentationSectionProps) {
+export function PresentationSection({ startAnimation, skipAnimation = false, onAnimationComplete }: PresentationSectionProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const bootSequenceRef = useRef<HTMLDivElement>(null)
   const gridRef = useRef<InteractiveGridHandle>(null)
+
   const [bootAnimationComplete, setBootAnimationComplete] = useState(false)
 
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -133,6 +133,14 @@ export function PresentationSection({ startAnimation, onAnimationComplete }: Pre
   }
 
   useEffect(() => {
+    if (skipAnimation) {
+      setBootAnimationComplete(true)
+      onAnimationComplete?.()
+    }
+  }, [skipAnimation])
+
+  useEffect(() => {
+    if (skipAnimation) return
     if (bootAnimationComplete || !startAnimation) return
 
     const bootCommands = [
@@ -181,7 +189,7 @@ export function PresentationSection({ startAnimation, onAnimationComplete }: Pre
         },
       })
     })
-  }, [bootAnimationComplete, startAnimation])
+  }, [skipAnimation, bootAnimationComplete, startAnimation])
 
   return (
     <div
@@ -204,7 +212,6 @@ export function PresentationSection({ startAnimation, onAnimationComplete }: Pre
           py-10 sm:py-10 lg:py-12 gap-8 lg:gap-0">
 
           <div className="flex flex-col w-full lg:flex-3">
-
             <div className="flex flex-row items-center gap-5 sm:gap-6">
               <Image
                 src={"/avatar.png"}

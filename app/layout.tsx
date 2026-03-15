@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, JetBrains_Mono, VT323 } from "next/font/google";
+import { Geist, Geist_Mono, JetBrains_Mono } from "next/font/google";
 import localFont from "next/font/local"
 import "./globals.css";
+
 
 const ocrA = localFont({
   src: './fonts/OCRAEXT.ttf',
@@ -22,7 +23,6 @@ const jetBrainsMono = JetBrains_Mono({
   variable: "--font-jet-brains-mono",
   subsets: ["latin"],
 });
-
 
 export const metadata: Metadata = {
   title: "Create Next App",

@@ -22,6 +22,7 @@ interface TextTypeProps {
   onSentenceComplete?: (sentence: string, index: number) => void;
   startOnVisible?: boolean;
   reverseMode?: boolean;
+  skipAnimation?: boolean;
 }
 
 const TextType = ({
@@ -43,17 +44,20 @@ const TextType = ({
   onSentenceComplete,
   startOnVisible = false,
   reverseMode = false,
+  skipAnimation = false,
   ...props
 }: TextTypeProps & React.HTMLAttributes<HTMLElement>) => {
+  const textArray = useMemo(() => (Array.isArray(text) ? text : [text]), [text]);
+  const fullText = textArray[0] ?? '';
+
   const [displayedText, setDisplayedText] = useState('');
   const [currentCharIndex, setCurrentCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(!startOnVisible);
+  const [ready, setReady] = useState(false);
   const cursorRef = useRef<HTMLSpanElement>(null);
   const containerRef = useRef<HTMLElement>(null);
-
-  const textArray = useMemo(() => (Array.isArray(text) ? text : [text]), [text]);
 
   const getRandomSpeed = useCallback(() => {
     if (!variableSpeed) return typingSpeed;
@@ -67,19 +71,23 @@ const TextType = ({
   };
 
   useEffect(() => {
-    if (!startOnVisible || !containerRef.current) return;
+    if (skipAnimation) {
+      setDisplayedText(fullText);
+      setCurrentCharIndex(fullText.length);
+    }
+    setReady(true);
+  }, [skipAnimation, fullText]);
 
+  useEffect(() => {
+    if (!startOnVisible || !containerRef.current) return;
     const observer = new IntersectionObserver(
       entries => {
         entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-          }
+          if (entry.isIntersecting) setIsVisible(true);
         });
       },
       { threshold: 0.1 }
     );
-
     observer.observe(containerRef.current);
     return () => observer.disconnect();
   }, [startOnVisible]);
@@ -92,12 +100,14 @@ const TextType = ({
         duration: cursorBlinkDuration,
         repeat: -1,
         yoyo: true,
-        ease: 'power2.inOut'
+        ease: 'power2.inOut',
       });
     }
   }, [showCursor, cursorBlinkDuration]);
 
   useEffect(() => {
+    if (skipAnimation) return;
+    if (!ready) return;
     if (!isVisible) return;
 
     let timeout: ReturnType<typeof setTimeout>;
@@ -109,14 +119,8 @@ const TextType = ({
       if (isDeleting) {
         if (displayedText === '') {
           setIsDeleting(false);
-          if (currentTextIndex === textArray.length - 1 && !loop) {
-            return;
-          }
-
-          if (onSentenceComplete) {
-            onSentenceComplete(textArray[currentTextIndex], currentTextIndex);
-          }
-
+          if (currentTextIndex === textArray.length - 1 && !loop) return;
+          if (onSentenceComplete) onSentenceComplete(textArray[currentTextIndex], currentTextIndex);
           setCurrentTextIndex(prev => (prev + 1) % textArray.length);
           setCurrentCharIndex(0);
           timeout = setTimeout(() => {}, pauseDuration);
@@ -136,9 +140,7 @@ const TextType = ({
           );
         } else if (textArray.length >= 1) {
           if (!loop && currentTextIndex === textArray.length - 1) return;
-          timeout = setTimeout(() => {
-            setIsDeleting(true);
-          }, pauseDuration);
+          timeout = setTimeout(() => setIsDeleting(true), pauseDuration);
         }
       }
     };
@@ -151,6 +153,8 @@ const TextType = ({
 
     return () => clearTimeout(timeout);
   }, [
+    skipAnimation,
+    ready,
     currentCharIndex,
     displayedText,
     isDeleting,
@@ -164,7 +168,8 @@ const TextType = ({
     isVisible,
     reverseMode,
     variableSpeed,
-    onSentenceComplete
+    onSentenceComplete,
+    getRandomSpeed,
   ]);
 
   const shouldHideCursor =
@@ -175,7 +180,7 @@ const TextType = ({
     {
       ref: containerRef,
       className: `inline-block whitespace-pre-wrap tracking-tight ${className}`,
-      ...props
+      ...props,
     },
     <span className="inline" style={{ color: getCurrentTextColor() || 'inherit' }}>
       {displayedText}

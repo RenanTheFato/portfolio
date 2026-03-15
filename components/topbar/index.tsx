@@ -8,9 +8,10 @@ import { SiGithub, SiGmail } from "@icons-pack/react-simple-icons";
 
 interface TopbarProps {
   onAnimationComplete?: () => void
+  skipAnimation?: boolean
 }
 
-export function Topbar({ onAnimationComplete }: TopbarProps) {
+export function Topbar({ onAnimationComplete, skipAnimation = false }: TopbarProps) {
   const typingSpeed = 50
 
   const texts = [
@@ -27,14 +28,17 @@ export function Topbar({ onAnimationComplete }: TopbarProps) {
   const totalDuration = delays[delays.length - 1] + (texts[texts.length - 1].text.length * typingSpeed)
 
   React.useEffect(() => {
-    if (onAnimationComplete) {
-      const timer = setTimeout(onAnimationComplete, totalDuration)
-      return () => clearTimeout(timer)
+    if (!onAnimationComplete) return
+    if (skipAnimation) {
+      onAnimationComplete()
+      return
     }
-  }, [onAnimationComplete, totalDuration])
+    const timer = setTimeout(onAnimationComplete, totalDuration)
+    return () => clearTimeout(timer)
+  }, [skipAnimation])
 
   return (
-    <header className=" w-full flex flex-row items-center justify-between border-b border-b-white/25 px-5 sm:px-10 lg:px-36
+    <header className="w-full flex flex-row items-center justify-between border-b border-b-white/25 px-5 sm:px-10 lg:px-36
       py-3 sm:py-4 gap-3">
 
       <span className="inline min-w-0 overflow-hidden text-xs sm:text-sm lg:text-base leading-none">
@@ -45,11 +49,11 @@ export function Topbar({ onAnimationComplete }: TopbarProps) {
             showCursor={item.showCursor ?? false}
             loop={false}
             className={`inline ${item.className}`}
-            initialDelay={delays[idx]}
+            initialDelay={skipAnimation ? 0 : delays[idx]}
+            skipAnimation={skipAnimation}
           />
         ))}
       </span>
-
 
       <div className="flex flex-row items-center gap-1.5 sm:gap-2 lg:gap-3 shrink-0">
         <SocialButton.Root href="https://www.linkedin.com/in/renan-santana007">
