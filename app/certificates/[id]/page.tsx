@@ -38,40 +38,43 @@ export default async function CertificatePage({ params }: PageProps) {
 
         <div className="flex-1 flex items-center justify-center p-8 lg:p-16 relative">
           <div className="absolute inset-0 pointer-events-none"
-            style={{ background: "radial-gradient(ellipse at center, rgba(212,175,55,0.06) 0%, transparent 65%)" }}
+            style={{ background: "radial-gradient(ellipse at center, hsla(45, 65%, 52%, 0.06) 0%, transparent 65%)" }}
           />
 
-          <div className="relative w-full max-w-3xl aspect-[1.414/1] rounded overflow-hidden shadow-2xl border border-white/10"
-            style={{ boxShadow: "0 0 60px rgba(212,175,55,0.12), 0 24px 80px rgba(0,0,0,0.8)" }}
+          <div className="relative w-full max-w-3xl rounded overflow-hidden shadow-2xl border border-white/10"
+            style={{ boxShadow: "0 0 3.75rem hsla(45, 65%, 52%, 0.12), 0 1.5rem 5rem hsla(0, 0%, 0%, 0.8)" }}
           >
             {cert.source ? (
               <Image
                 src={`/${cert.source}`}
                 alt={cert.name}
-                fill
+                width={1200}
+                height={1200}
                 sizes="(max-width: 1024px) 100vw, 70vw"
                 quality={95}
-                className="object-contain bg-[#0d0d0d]"
+                className="w-full h-auto bg-[hsl(0,0%,5%)]"
                 priority
               />
             ) : (
-              <iframe src={cert.url} className="w-full h-full border-0 bg-[#0d0d0d]" title={cert.name} />
+              <iframe src={cert.url} className="w-full aspect-video border-0 bg-[#0d0d0d]" title={cert.name} />
             )}
 
-            <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: "inset 0 0 40px rgba(0,0,0,0.4)" }} />
+            <div className="absolute inset-0 pointer-events-none"
+              style={{ boxShadow: "inset 0 0 2.5rem hsla(0, 0%, 0%, 0.4)" }}
+            />
           </div>
         </div>
 
         <aside className="w-full lg:w-96 xl:w-105 flex flex-col justify-center gap-8 px-8 lg:px-12 py-10 border-t lg:border-t-0 lg:border-l border-white/10">
 
           <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-full overflow-hidden bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
+            <div className="shrink-0 w-16 h-16 flex items-center justify-center">
               {cert.organization_image ? (
                 <Image
                   src={`/${cert.organization_image}`}
                   alt={cert.issuing_organization}
-                  width={56}
-                  height={56}
+                  width={64}
+                  height={64}
                   quality={95}
                   className="object-contain"
                 />
@@ -89,7 +92,7 @@ export default async function CertificatePage({ params }: PageProps) {
 
           <div>
             <p className="text-white/50 text-xs uppercase tracking-[0.3em] mb-3 font-mono">Certificate</p>
-            <h1 className="text-white text-3xl xl:text-4xl leading-tight ">
+            <h1 className="text-white text-3xl xl:text-4xl leading-tight">
               {cert.name}
             </h1>
           </div>
@@ -114,7 +117,7 @@ export default async function CertificatePage({ params }: PageProps) {
           </div>
 
           <a className="mt-2 flex items-center justify-center gap-2 w-full py-4 border border-yellow-400/30 text-yellow-300/70 hover:bg-yellow-400/10 hover:text-yellow-200 hover:border-yellow-400/60 transition-all duration-300 rounded-sm text-sm uppercase tracking-widest font-mono"
-            href={cert.url} target="_blank" rel="noopener noreferrer" 
+            href={cert.url} target="_blank" rel="noopener noreferrer"
           >
             <GoArrowUpRight className="w-6 h-6"/>
             Verify certificate
