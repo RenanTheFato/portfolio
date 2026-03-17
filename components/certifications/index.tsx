@@ -15,7 +15,7 @@ export function Certifications() {
 
       <div className="relative flex flex-col">
 
-        <div className="flex flex-wrap gap-10 sm:gap-16 items-end pb-5 px-2">
+        <div className="flex justify-between flex-wrap gap-10 sm:gap-16 items-end pb-5 px-2">
           {certifications.map((cert, i) => (
             <TrophyCard key={cert.credential_id} cert={cert} index={i} />
           ))}
