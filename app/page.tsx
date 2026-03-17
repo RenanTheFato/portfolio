@@ -6,6 +6,7 @@ import { Topbar } from "@/components/topbar";
 import { Projects } from "@/components/projects";
 import { useCustomScrollbar, ScrollTrack } from "@/utils/scroll";
 import { Certifications } from "@/components/certifications";
+import { Contact } from "@/components/contact";
 
 const ANIMATION_KEY = "portfolio_intro_done"
 
@@ -48,6 +49,7 @@ export default function Home() {
           <PresentationSection startAnimation={topbarComplete} skipAnimation={skipAnimation} onAnimationComplete={handleAnimationComplete} />
           <Projects />
           <Certifications />
+          <Contact />
         </main>
       </div>
     </div>
