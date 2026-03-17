@@ -13,7 +13,7 @@ interface ProjectImageProps {
 
 function Project({ children, onClick }: ProjectProps) {
   return (
-    <div onClick={onClick} className="flex flex-col items-start justify-between border border-white/20 rounded-md overflow-hidden">
+    <div onClick={onClick} className="flex flex-col items-start justify-between cursor-pointer border border-white/20 rounded-md overflow-hidden">
       {children}
     </div>
   )

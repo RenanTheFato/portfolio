@@ -34,7 +34,7 @@ export function Visualizer() {
 
       <div className="w-full h-10 flex items-center justify-between px-3 sm:px-4 border-b border-b-white/25 shrink-0">
         <span className="text-white/60 text-xs sm:text-sm">Preview</span>
-        <button onClick={() => setSelected(null)} className="text-white/40 hover:text-white/80 text-lg leading-none transition-colors">
+        <button onClick={() => setSelected(null)} className="text-white/40 hover:text-white/80 text-lg leading-none transition-colors cursor-pointer">
           ×
         </button>
       </div>
