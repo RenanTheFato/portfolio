@@ -80,7 +80,7 @@ export function TrophyCard({ cert, index }: { cert: CertificationData; index: nu
         </div>
 
         <div className="flex flex-col gap-1 min-w-0">
-          <span className="text-white/85 text-lg font-semibold leading-tight transition-colors duration-200 group-hover:text-yellow-300 truncate">
+          <span className="text-white/85 text-lg text-wrap font-semibold leading-tight transition-colors duration-200 group-hover:text-yellow-300 truncate">
             {cert.name}
           </span>
           <span className="text-white/60 text-sm uppercase tracking-widest truncate">{cert.issuing_organization}</span>
