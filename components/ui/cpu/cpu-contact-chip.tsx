@@ -1,16 +1,20 @@
 import { ContactChipProps } from "@/types/contatct-chip"
 import { CopyButton } from "../copy-button"
+import Image from "next/image"
 
-
-export function ContactChip({ label, value, href, icon: Icon, color, accentBg, accentBorder, copyable}: ContactChipProps) {
+export function ContactChip({ label, value, href, icon: Icon, isSvg, color, accentBg, accentBorder, copyable }: ContactChipProps) {
   return (
     <a href={href} target={href.startsWith("mailto") ? undefined : "_blank"} rel="noopener noreferrer"
       className="group relative flex items-center gap-4 px-5 py-4 rounded transition-all duration-200 hover:brightness-110"
-      style={{ background: accentBg, border: `1px solid ${accentBorder}`}}
+      style={{ background: accentBg, border: `1px solid ${accentBorder}` }}
     >
       <span className="w-2 h-2 rounded-full shrink-0" style={{ background: color, boxShadow: `0 0 7px ${color}99` }} />
 
-      <Icon size={18} style={{ color }} className="shrink-0" />
+      {isSvg ? (
+        <Image src={Icon as string} alt={label} width={18} height={18} className="shrink-0" style={{ filter: "brightness(0) invert(1)" }} />
+      ) : (
+        <Icon size={18} style={{ color }} className="shrink-0" />
+      )}
 
       <div className="flex flex-col min-w-0 flex-1 gap-1">
         <span className="font-brains text-[10px] text-white/25 leading-none tracking-widest">{label}</span>

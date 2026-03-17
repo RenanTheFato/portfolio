@@ -1,5 +1,8 @@
-import { SiGithub, SiJavascript, SiGmail } from "@icons-pack/react-simple-icons"
+'use client'
+
+import { SiGithub, SiGmail } from "@icons-pack/react-simple-icons"
 import { ContactChip } from "./cpu-contact-chip"
+import Linkedin from '../../../public/linkedin.svg';
 
 const EMAIL = "renan.thefato.dev@gmail.com"
 
@@ -48,8 +51,9 @@ export function CpuDie() {
             label="LINKEDIN"
             value="renan-santana007"
             href="https://www.linkedin.com/in/renan-santana007"
-            icon={SiJavascript}
+            icon={Linkedin}
             color="#0A66C2"
+            isSvg
             accentBg="rgba(10,102,194,0.07)"
             accentBorder="rgba(10,102,194,0.22)"
           />
