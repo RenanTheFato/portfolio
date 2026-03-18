@@ -17,9 +17,9 @@ export const certifications: CertificationData[] = [
     issuing_organization: "Venturus",
     issue_date: "December 2025",
     organization_image: "venturus-logo.png",
-    credential_id: "",
+    credential_id: "vnt",
     url: "https://github.com/RenanTheFato/Hisui",
-    source: "venturus-hackathon.png"
+    source: "venturus.jpeg"
   },
   {
     name: "NLW Agents Advanced Level",
