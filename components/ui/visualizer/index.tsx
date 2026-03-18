@@ -5,6 +5,7 @@ import { useProject } from "@/contexts/project-context";
 import { Badge } from "../badge";
 import { SocialButton } from "../social-button";
 import { SiFiles, SiGithub } from "@icons-pack/react-simple-icons";
+import { useCustomScrollbar, ScrollTrack } from "@/utils/scroll";
 
 const focusLabel = {
   frontend: "Frontend",
@@ -20,6 +21,7 @@ const focusColor = {
 
 export function Visualizer() {
   const { selected, setSelected } = useProject()
+  const { mainRef, thumbRef, trackRef, handleScroll } = useCustomScrollbar()
 
   if (!selected) {
     return (
@@ -43,59 +45,59 @@ export function Visualizer() {
         <Image src={selected.image} alt={selected.alt} fill className="object-cover" />
       </div>
 
-      <div className="flex flex-col gap-2 p-3 sm:p-4 lg:p-5 pb-5 sm:pb-6 lg:pb-7 overflow-y-auto flex-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div className="relative flex-1 min-h-0">
+        <div ref={mainRef} onScroll={handleScroll} className="flex flex-col gap-2 p-3 sm:p-4 lg:p-5 pb-5 sm:pb-6 lg:pb-7 overflow-y-auto h-full [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="flex items-start justify-between gap-2">
+            <h2 className="text-white text-base sm:text-lg lg:text-xl font-semibold">{selected.title}</h2>
+            <span className="text-xs px-2 py-1 rounded-md font-medium shrink-0"
+              style={{ backgroundColor: focusColor[selected.focus].replace("hsl(", "hsla(").replace(")", ", 0.13)"),
+                color: focusColor[selected.focus], border: `1px solid ${focusColor[selected.focus].replace("hsl(", "hsla(").replace(")", ", 0.27)")}`,
+              }}
+            >
+              {focusLabel[selected.focus]}
+            </span>
+          </div>
 
-        <div className="flex items-start justify-between gap-2">
-          <h2 className="text-white text-base sm:text-lg lg:text-xl font-semibold">{selected.title}</h2>
-          <span
-            className="text-xs px-2 py-1 rounded-md font-medium shrink-0"
-            style={{
-              backgroundColor: focusColor[selected.focus].replace("hsl(", "hsla(").replace(")", ", 0.13)"),
-              color: focusColor[selected.focus],
-              border: `1px solid ${focusColor[selected.focus].replace("hsl(", "hsla(").replace(")", ", 0.27)")}`,
-            }}
-          >
-            {focusLabel[selected.focus]}
-          </span>
-        </div>
+          <p className="text-white/60 text-xs sm:text-sm text-justify leading-relaxed">{selected.description}</p>
 
-        <p className="text-white/60 text-xs sm:text-sm text-justify leading-relaxed">{selected.description}</p>
+          <div className="h-px bg-white/10" />
 
-        <div className="h-px bg-white/10" />
+          <div className="flex flex-col gap-2">
+            <span className="text-white/40 text-xs uppercase tracking-widest">Technologies</span>
+            <div className="flex flex-wrap gap-1.5 sm:gap-2">
+              {selected.techs.map((tech) => (
+                <Badge key={tech.label} color={tech.color}>
+                  <Badge.Icon icon={tech.icon} color={tech.color} iconColor={tech.iconColor} />
+                  <Badge.Title>{tech.label}</Badge.Title>
+                </Badge>
+              ))}
+            </div>
+          </div>
 
-        <div className="flex flex-col gap-2">
-          <span className="text-white/40 text-xs uppercase tracking-widest">Technologies</span>
-          <div className="flex flex-wrap gap-1.5 sm:gap-2">
-            {selected.techs.map((tech) => (
-              <Badge key={tech.label} color={tech.color}>
-                <Badge.Icon icon={tech.icon} color={tech.color} iconColor={tech.iconColor} />
-                <Badge.Title>{tech.label}</Badge.Title>
-              </Badge>
-            ))}
+          <div className="flex flex-col gap-2">
+            <span className="text-white/40 text-xs uppercase tracking-widest">Links</span>
+            <div className="flex gap-2">
+              {selected.links.github && (
+                <SocialButton.Root href={selected.links.github.url}>
+                  <SocialButton.Background className="bg-linear-to-r from-gray-400 to-white" />
+                  <SocialButton.Icon icon={SiGithub} text="GitHub" isSvg={false} iconClassName="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-black transition-colors" />
+                  <SocialButton.Text className="text-white group-hover:text-black transition-colors">GitHub</SocialButton.Text>
+                </SocialButton.Root>
+              )}
+              {selected.links.project && (
+                <SocialButton.Root href={selected.links.project.url}>
+                  <SocialButton.Background className="bg-linear-to-r from-blue-400 to-blue-800" />
+                  <SocialButton.Icon icon={SiFiles} text="Project" isSvg={false} iconClassName="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+                  <SocialButton.Text>Project</SocialButton.Text>
+                </SocialButton.Root>
+              )}
+            </div>
           </div>
         </div>
 
-        <div className="flex flex-col gap-2">
-          <span className="text-white/40 text-xs uppercase tracking-widest">Links</span>
-          <div className="flex gap-2">
-            {selected.links.github && (
-              <SocialButton.Root href={selected.links.github.url}>
-                <SocialButton.Background className="bg-linear-to-r from-gray-400 to-white" />
-                <SocialButton.Icon icon={SiGithub} text="GitHub" isSvg={false} iconClassName="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-black transition-colors" />
-                <SocialButton.Text className="text-white group-hover:text-black transition-colors">GitHub</SocialButton.Text>
-              </SocialButton.Root>
-            )}
-            {selected.links.project && (
-              <SocialButton.Root href={selected.links.project.url}>
-                <SocialButton.Background className="bg-linear-to-r from-blue-400 to-blue-800" />
-                <SocialButton.Icon icon={SiFiles} text="Project" isSvg={false} iconClassName="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-                <SocialButton.Text>Project</SocialButton.Text>
-              </SocialButton.Root>
-            )}
-          </div>
-        </div>
-
+        <ScrollTrack trackRef={trackRef} thumbRef={thumbRef} />
       </div>
+
     </div>
   )
 }
