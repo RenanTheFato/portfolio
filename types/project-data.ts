@@ -5,6 +5,7 @@ export interface TechItem {
   icon: IconType | RcIconType
   label: string
   color: string
+  iconColor?: string
 }
 
 export interface ProjectLink {

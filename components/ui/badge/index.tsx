@@ -7,7 +7,8 @@ interface BadgeProps {
 
 interface BadgeIconProps {
   icon: ElementType,
-  color: string
+  color: string,
+  iconColor?: string
 }
 
 function Badge({ children, color }: BadgeProps) {
@@ -29,10 +30,10 @@ function Title({ children }: BadgeProps) {
   )
 }
 
-function Icon({ icon: IconComponent, color }: BadgeIconProps) {
+function Icon({ icon: IconComponent, color, iconColor }: BadgeIconProps) {
   return (
     <div className="flex items-center">
-      <IconComponent color={color} size={14} />
+      <IconComponent color={iconColor ?? color} size={14} />
     </div>
   )
 }

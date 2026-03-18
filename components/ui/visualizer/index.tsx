@@ -68,7 +68,7 @@ export function Visualizer() {
           <div className="flex flex-wrap gap-1.5 sm:gap-2">
             {selected.techs.map((tech) => (
               <Badge key={tech.label} color={tech.color}>
-                <Badge.Icon icon={tech.icon} color={tech.color} />
+                <Badge.Icon icon={tech.icon} color={tech.color} iconColor={tech.iconColor} />
                 <Badge.Title>{tech.label}</Badge.Title>
               </Badge>
             ))}

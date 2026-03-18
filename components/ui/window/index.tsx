@@ -31,7 +31,7 @@ export function Window() {
                   <Project.Badges>
                     {project.techs.slice(0, 3).map((tech) => (
                       <Badge key={tech.label} color={tech.color}>
-                        <Badge.Icon icon={tech.icon} color={tech.color} />
+                        <Badge.Icon icon={tech.icon} color={tech.color} iconColor={tech.iconColor}/>
                         <Badge.Title>{tech.label}</Badge.Title>
                       </Badge>
                     ))}
