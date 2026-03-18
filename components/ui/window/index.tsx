@@ -12,7 +12,7 @@ export function Window() {
   const { setSelected } = useProject()
 
   return (
-    <section className="flex flex-col w-full lg:w-7/12 h-64 sm:h-80 lg:h-full border-2 border-white/40 rounded-t-lg shrink-0">
+    <section className="flex flex-col w-full lg:w-7/12 h-84 sm:h-80 lg:h-full border-2 border-white/40 rounded-t-lg shrink-0">
       <div className="w-full h-10 flex items-center flex-row border-b border-b-white/25 rounded-t-2xl shrink-0">
         <VscRootFolder className="mx-3 sm:mx-4" size={20} />
         <div className="w-5/12 sm:w-4/12 lg:w-3/12 bg-gray-100/30 h-full rounded-t-lg flex items-center justify-center">
