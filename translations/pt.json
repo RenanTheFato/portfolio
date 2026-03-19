@@ -1,0 +1,103 @@
+{
+  "nav": {
+    "skills": "$ Habilidades",
+    "projects": "$ Projetos",
+    "certifications": "$ Certificações",
+    "contact": "$ Contato"
+  },
+  "presentation": {
+    "myName": "Meu Nome:",
+    "experience": "Experiência:",
+    "scope": "Área:",
+    "years": "4 anos",
+    "fullstack": "FullStack",
+    "skillsTitle": "Habilidades",
+    "techStack": "Stack de Tecnologias"
+  },
+  "skills": {
+    "frontend": {
+      "label": "Desenvolvimento Frontend",
+      "desc": "SPAs, SSR, sistemas de componentes"
+    },
+    "backend": {
+      "label": "Desenvolvimento Backend",
+      "desc": "REST, microsserviços"
+    },
+    "database": {
+      "label": "Design de Banco de Dados",
+      "desc": "Relacional, migrações, ORMs"
+    },
+    "devops": {
+      "label": "Cloud & DevOps",
+      "desc": "Docker, CI/CD, deploys"
+    },
+    "api": {
+      "label": "Arquitetura de API",
+      "desc": "Design, versionamento, contratos"
+    },
+    "system": {
+      "label": "Design de Sistemas",
+      "desc": "Escalabilidade, padrões, DDD"
+    }
+  },
+  "boot": {
+    "lines": [
+      "> Inicializando sessão de perfil............. [OK]",
+      "> Carregando dados pessoais.................. [OK]",
+      "> Buscando identidade........................ [OK]",
+      "> Verificando habilidades principais......... [OK]",
+      "> Analisando nível de experiência............ [OK]",
+      "> Mapeando interesses........................ [OK]",
+      "> Compilando resumo do perfil................ [OK]",
+      "> Módulo de apresentação pronto.............. [OK]"
+    ]
+  },
+  "projects": {
+    "folderTab": "Pasta de Projetos",
+    "selectPrompt": "Selecione um projeto para visualizar",
+    "preview": "Visualização",
+    "technologies": "Tecnologias",
+    "links": "Links",
+    "focus": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "fullstack": "Fullstack"
+    },
+    "items": {
+      "hisui": {
+        "description": "Hisui é uma plataforma fullstack focada em potencializar decisões de investimento mais inteligentes por meio de insights orientados a dados, com modelo de machine learning próprio para analisar o comportamento do mercado de ações. Projetado para reduzir incertezas e melhorar a clareza na gestão de investimentos, o projeto enfatiza análise inteligente e suporte à decisão, conquistando o 2º lugar em uma competição de programação pela sua inovação e impacto."
+      },
+      "logAnalyzer": {
+        "description": "Log Analyzer é uma ferramenta de linha de comando construída com Java para analisar arquivos de log diretamente do terminal. Permite filtrar o conteúdo por nível, palavras-chave e data, exibindo os resultados em formato estruturado e exportando automaticamente a saída para um arquivo de texto."
+      },
+      "reservationApi": {
+        "description": "Reservation API é uma aplicação backend RESTful robusta construída com Node.js e TypeScript para gerenciar reservas de salas, recursos ou serviços. Possui autenticação e autorização baseadas em papéis, operações CRUD estruturadas e lógica de negócio avançada para lidar com regras de reserva e disponibilidade. O sistema utiliza PostgreSQL para armazenamento persistente, Redis para cache e processamento de jobs em segundo plano, e Docker para implantação em contêiner. Com tarefas automatizadas para gerenciamento de status de reservas e documentação Swagger integrada, a API entrega uma solução escalável, organizada e pronta para produção."
+      },
+      "thermalScript": {
+        "description": "Thermal Shell Script é uma ferramenta de linha de comando construída com Bash para monitorar temperaturas de CPU e hardware diretamente do terminal. Lê dados de sensores nativamente do sistema de arquivos do kernel Linux, sem dependências externas, e exibe os resultados com indicadores de status codificados por cores baseados em limites de temperatura configuráveis."
+      },
+      "goatMusic": {
+        "description": "Goat Music é uma aplicação web moderna de streaming de música construída com React, TypeScript e Tailwind CSS, projetada para oferecer uma experiência de usuário fluida e visualmente envolvente. Conecta-se a um serviço backend para gerenciar arquivos de áudio e assets de mídia, permitindo upload de músicas e capas de álbuns com controle total sobre a reprodução. Com visualizações de ondas sonoras dinâmicas, filtragem de músicas e design responsivo para desktop e mobile."
+      },
+      "socialMediaApi": {
+        "description": "Social Media API é uma aplicação backend RESTful construída com Node.js e TypeScript para gerenciar funcionalidades centrais de redes sociais. Oferece autenticação segura baseada em JWT, gerenciamento de usuários, criação de posts, comentários e sistema de seguidores, tudo alimentado por um banco de dados PostgreSQL. A API é projetada com arquitetura modular, entregando endpoints organizados e escaláveis com documentação interativa automática via Swagger."
+      }
+    }
+  },
+  "certifications": {
+    "title": "Certifications"
+  },
+  "certificate": {
+    "backToPortfolio": "Back to portfolio",
+    "certificateLabel": "Certificate",
+    "issuedBy": "Issued by",
+    "certificate": "Certificate",
+    "about": "About",
+    "issueDate": "Issue date",
+    "credentialId": "Credential ID",
+    "verify": "Verify certificate"
+  },
+  "contact": {
+    "title": "Contato"
+  }
+}

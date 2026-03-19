@@ -5,6 +5,7 @@ import { FaJava } from "react-icons/fa"
 export const projects: ProjectData[] = [
   {
     title: "Hisui",
+    translationKey: "hisui",
     image: "/hisui.png",
     alt: "Hisui project",
     description: "Hisui is a fullstack platform focused on empowering smarter investment decisions through data-driven insights, featuring its own machine learning model to analyze stock market behavior and support more informed financial strategies. Designed with the purpose of reducing uncertainty and improving clarity in investment management, the project emphasizes intelligent analysis and decision support, earning 2nd place in a programming competition for its innovation and impact.",
@@ -30,6 +31,7 @@ export const projects: ProjectData[] = [
   },
   {
     title: "LogAnalyzer",
+    translationKey: "logAnalyzer",
     image: "/log-analyzer-cli.png",
     alt: "LogAnalyzer project",
     description: "Log Analyzer is a command-line interface tool built with Java for analyzing log files directly from your terminal. It allows you to filter log content by level, keywords, and date, displaying results in a structured format and exporting the output to a text file automatically.",
@@ -46,6 +48,7 @@ export const projects: ProjectData[] = [
   },
   {
     title: "Reservation API",
+    translationKey: "reservationApi",
     image: "/reservation-api.png",
     alt: "Reservation API project",
     description: "Reservation API is a robust RESTful backend application built with Node.js and TypeScript for managing reservations of rooms, resources, or services. It features role-based authentication and authorization, structured CRUD operations, and advanced business logic to handle booking rules and availability. The system leverages PostgreSQL for persistent storage, Redis for caching and background job processing, and Docker for easy containerized deployment. With automated tasks for reservation status management and integrated Swagger documentation, the API delivers a scalable, organized, and production-ready solution for scheduling systems.",
@@ -64,6 +67,7 @@ export const projects: ProjectData[] = [
   },
   {
     title: "Thermal Shell Script",
+    translationKey: "thermalScript",
     image: "/thermal-script.png",
     alt: "Thermal Shell Script project",
     description: "Thermal Shell Script is a command-line tool built with Bash for monitoring CPU and hardware temperatures directly from your terminal. It reads sensor data natively from the Linux kernel filesystem, requiring no external dependencies, and displays results with color-coded status indicators based on configurable temperature thresholds.",
@@ -79,6 +83,7 @@ export const projects: ProjectData[] = [
   },
   {
     title: "Goat Music",
+    translationKey: "goatMusic",
     image: "/goat-music.png",
     alt: "Goat Music project",
     description: "Goat Music is a modern music streaming web application built with React, TypeScript, and Tailwind CSS, designed to deliver a smooth and visually engaging user experience. It connects to a backend service for managing audio files and media assets, allowing users to upload songs and album covers while providing full control over playback. With features like dynamic sound wave visualizations, music filtering, and responsive design for both desktop and mobile, the application offers a clean, intuitive interface for interacting with personal music libraries.",
@@ -96,6 +101,7 @@ export const projects: ProjectData[] = [
   },
     {
     title: "Social Media API",
+    translationKey: "socialMediaApi",
     image: "/social-media.png",
     alt: "Social Media API project",
     description: "Social Media API is a RESTful backend application built with Node.js and TypeScript for managing core social network functionalities. It provides secure JWT-based authentication, user management, post creation, commenting, and a follow system, all powered by a PostgreSQL database. The API is designed with a modular architecture, delivering organized, scalable endpoints and automatic interactive documentation via Swagger.",
