@@ -1,3 +1,5 @@
+'use client'
+
 import { ContactChipProps } from "@/types/contatct-chip"
 import { CopyButton } from "../copy-button"
 import Image from "next/image"

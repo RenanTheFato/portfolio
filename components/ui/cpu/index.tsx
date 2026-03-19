@@ -1,3 +1,5 @@
+'use client'
+
 import { CpuDie } from "./cpu-die";
 import { CpuPin } from "./cpu-pin";
 

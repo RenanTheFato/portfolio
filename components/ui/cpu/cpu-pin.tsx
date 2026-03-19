@@ -1,3 +1,5 @@
+'use client'
+
 interface CpuPinProps {
   side: "left" | "right"
 }

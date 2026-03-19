@@ -1,3 +1,5 @@
+'use client'
+
 import { useRef, useEffect, useImperativeHandle, forwardRef } from "react";
 
 interface GridOffset {
