@@ -85,17 +85,17 @@
     }
   },
   "certifications": {
-    "title": "Certifications"
+    "title": "Certificados"
   },
   "certificate": {
-    "backToPortfolio": "Back to portfolio",
-    "certificateLabel": "Certificate",
-    "issuedBy": "Issued by",
-    "certificate": "Certificate",
-    "about": "About",
-    "issueDate": "Issue date",
-    "credentialId": "Credential ID",
-    "verify": "Verify certificate"
+    "backToPortfolio": "Voltar ao Portfólio",
+    "certificateLabel": "Certificado",
+    "issuedBy": "Emitido por",
+    "certificate": "Certificado",
+    "about": "Sobre",
+    "issueDate": "Data de Emissão",
+    "credentialId": "Identificador da Credencial",
+    "verify": "Verificar Certificado"
   },
   "contact": {
     "title": "Contato"
