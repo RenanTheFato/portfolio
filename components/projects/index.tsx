@@ -71,7 +71,7 @@ export function Projects() {
           )
         })
       },
-      { threshold: 0.45 }
+      { threshold: 0.60 }
     )
 
     observer.observe(el)
