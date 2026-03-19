@@ -82,11 +82,11 @@ function SkillsSection() {
 
   const HARD_SKILLS = [
     { label: t('skills.frontend.label'), desc: t('skills.frontend.desc') },
-    { label: t('skills.backend.label'),  desc: t('skills.backend.desc') },
+    { label: t('skills.backend.label'), desc: t('skills.backend.desc') },
     { label: t('skills.database.label'), desc: t('skills.database.desc') },
-    { label: t('skills.devops.label'),   desc: t('skills.devops.desc') },
-    { label: t('skills.api.label'),      desc: t('skills.api.desc') },
-    { label: t('skills.system.label'),   desc: t('skills.system.desc') },
+    { label: t('skills.devops.label'), desc: t('skills.devops.desc') },
+    { label: t('skills.api.label'), desc: t('skills.api.desc') },
+    { label: t('skills.system.label'), desc: t('skills.system.desc') },
   ]
 
   return (
@@ -135,6 +135,7 @@ export function PresentationSection({ startAnimation, skipAnimation = false, onA
   const t = useTranslations()
   const containerRef = useRef<HTMLDivElement>(null)
   const bootSequenceRef = useRef<HTMLDivElement>(null)
+  const contentRef = useRef<HTMLElement>(null)
   const gridRef = useRef<InteractiveGridHandle>(null)
 
   const [bootAnimationComplete, setBootAnimationComplete] = useState(false)
@@ -165,7 +166,6 @@ export function PresentationSection({ startAnimation, skipAnimation = false, onA
     if (bootAnimationComplete || !startAnimation) return
 
     const bootCommands = t.raw('boot.lines') as string[]
-
     const bootTimeline = gsap.timeline()
 
     bootCommands.forEach((command, index) => {
@@ -203,6 +203,45 @@ export function PresentationSection({ startAnimation, skipAnimation = false, onA
     })
   }, [skipAnimation, bootAnimationComplete, startAnimation])
 
+  useEffect(() => {
+    if (!bootAnimationComplete) return
+
+    const el = contentRef.current
+    if (!el) return
+
+    const avatar = el.querySelector('.fade-avatar')
+    const info = el.querySelector('.fade-info')
+    const skills = el.querySelector('.fade-skills')
+    const menu = el.querySelector('.fade-menu')
+
+    if (skipAnimation) {
+      gsap.set([avatar, info, skills, menu], { opacity: 1, y: 0, x: 0 })
+      return
+    }
+
+    const tl = gsap.timeline()
+
+    tl.fromTo(avatar,
+      { opacity: 0, y: 16 },
+      { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }
+    )
+      .fromTo(info,
+        { opacity: 0, y: 16 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
+        "-=0.4"
+      )
+      .fromTo(skills,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" },
+        "-=0.3"
+      )
+      .fromTo(menu,
+        { opacity: 0, x: 16 },
+        { opacity: 1, x: 0, duration: 0.6, ease: "power2.out" },
+        "-=0.5"
+      )
+  }, [bootAnimationComplete, skipAnimation])
+
   return (
     <div
       ref={containerRef}
@@ -220,20 +259,25 @@ export function PresentationSection({ startAnimation, skipAnimation = false, onA
           </div>
         </div>
       ) : (
-        <section className="relative z-10 flex flex-col lg:flex-row justify-start lg:justify-between w-full min-h-full px-6 sm:px-10 lg:px-36
-          py-10 sm:py-10 lg:py-12 gap-8 lg:gap-0">
-
+        <section
+          ref={contentRef}
+          className="relative z-10 flex flex-col lg:flex-row justify-start lg:justify-between w-full min-h-full px-6 sm:px-10 lg:px-36 py-10 sm:py-10 lg:py-12 gap-8 lg:gap-0"
+        >
           <div className="flex flex-col w-full lg:flex-3">
             <div className="flex flex-row items-center gap-5 sm:gap-6">
-              <Image
-                src={"/avatar.png"}
-                alt="profile pic"
-                width={144}
-                height={144}
-                className="rounded-md w-22 h-22 sm:w-24 sm:h-24 lg:w-36 lg:h-36 shrink-0"
-                loading="eager"
-              />
-              <section className="flex flex-col gap-1.5 sm:gap-1 lg:gap-2 min-w-0">
+
+              <div className="fade-avatar opacity-0">
+                <Image
+                  src={"/avatar.png"}
+                  alt="profile pic"
+                  width={144}
+                  height={144}
+                  className="rounded-md w-22 h-22 sm:w-24 sm:h-24 lg:w-36 lg:h-36 shrink-0"
+                  loading="eager"
+                />
+              </div>
+
+              <section className="fade-info opacity-0 flex flex-col gap-1.5 sm:gap-1 lg:gap-2 min-w-0">
                 <div className="flex flex-row flex-wrap gap-x-2 sm:gap-x-4">
                   <span className="text-white/40 font-brains text-xs sm:text-sm lg:text-base shrink-0">
                     {t('presentation.myName')}
@@ -256,17 +300,20 @@ export function PresentationSection({ startAnimation, skipAnimation = false, onA
                     {t('presentation.fullstack')}
                   </span>
                 </div>
+
+                <div className="ml-auto self-start lg:hidden">
+                  <BurgerMenu />
+                </div>
               </section>
 
-              <div className="ml-auto self-start lg:hidden">
-                <BurgerMenu />
-              </div>
             </div>
 
-            <SkillsSection />
+            <div className="fade-skills opacity-0">
+              <SkillsSection />
+            </div>
           </div>
 
-          <div className="hidden lg:flex flex-col flex-1">
+          <div className="fade-menu opacity-0 hidden lg:flex flex-col flex-1">
             <section className="flex flex-col gap-6">
               {MENU_ITEMS.map((label) => (
                 <MenuItem key={label} label={label} />
