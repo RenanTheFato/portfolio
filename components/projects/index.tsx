@@ -31,8 +31,9 @@ export function Projects() {
     if (!el || !lid || !content) return
 
     if (skip) {
-      gsap.set(lid, { scaleY: 0, transformOrigin: "top center" })
+      gsap.set(lid, { scaleY: 0, opacity: 0 })
       gsap.set(content, { opacity: 1, clipPath: "inset(0% 0% 0% 0%)" })
+      gsap.set(content.querySelectorAll('.fade-window, .fade-visualizer'), { opacity: 1, y: 0 })
       return
     }
 
@@ -82,17 +83,34 @@ export function Projects() {
   return (
     <ProjectProvider>
       <div ref={containerRef} className="relative w-full h-full bg-black border-t border-t-white/30">
-        <div ref={lidRef} className="absolute inset-0 z-20 pointer-events-none"
-          style={{ background: "linear-gradient(180deg, hsl(213, 75%, 28%) 0%, hsl(213, 70%, 22%) 100%)",
-            borderTop: "2px solid hsl(213, 80%, 45%)", transformOrigin: "top center", boxShadow: "inset 0 1px 0 hsla(213, 100%, 80%, 0.12)"}}
+        <div
+          ref={lidRef}
+          className="absolute inset-0 z-20 pointer-events-none"
+          style={{
+            background: "linear-gradient(180deg, hsl(213, 75%, 28%) 0%, hsl(213, 70%, 22%) 100%)",
+            borderTop: "2px solid hsl(213, 80%, 45%)",
+            transformOrigin: "top center",
+            boxShadow: "inset 0 1px 0 hsla(213, 100%, 80%, 0.12)",
+          }}
         >
-          <div className="absolute -top-6 left-10 h-6 w-32 rounded-t-lg"
-            style={{ background: "linear-gradient(180deg, hsl(213, 75%, 32%) 0%, hsl(213, 75%, 28%) 100%)", border: "1px solid hsl(213, 80%, 45%)",
-              borderBottom: "none", boxShadow: "inset 0 1px 0 hsla(213, 100%, 80%, 0.1)"}}
+          <div
+            className="absolute -top-6 left-10 h-6 w-32 rounded-t-lg"
+            style={{
+              background: "linear-gradient(180deg, hsl(213, 75%, 32%) 0%, hsl(213, 75%, 28%) 100%)",
+              border: "1px solid hsl(213, 80%, 45%)",
+              borderBottom: "none",
+              boxShadow: "inset 0 1px 0 hsla(213, 100%, 80%, 0.1)",
+            }}
           />
           <div className="absolute top-5 left-8 right-8 flex flex-col gap-2.5">
             {[...Array(6)].map((_, i) => (
-              <div key={i} className="h-px" style={{ background: `hsla(213, 100%, 80%, ${0.06 - i * 0.008})`, width: `${100 - i * 4}%`}}
+              <div
+                key={i}
+                className="h-px"
+                style={{
+                  background: `hsla(213, 100%, 80%, ${0.06 - i * 0.008})`,
+                  width: `${100 - i * 4}%`,
+                }}
               />
             ))}
           </div>
@@ -102,8 +120,9 @@ export function Projects() {
           />
         </div>
 
-        <div ref={contentRef} className="relative z-10 flex flex-col lg:flex-row p-4 sm:p-6 lg:p-8 lg:px-24 gap-4 sm:gap-6 lg:space-x-8 h-full overflow-hidden"
-          style={{ opacity: 0 }}
+        <div
+          ref={contentRef}
+          className="relative z-10 flex flex-col lg:flex-row p-4 sm:p-6 lg:p-8 lg:px-24 gap-4 sm:gap-6 lg:space-x-8 h-full overflow-hidden"
         >
           <div className="fade-window opacity-0 flex w-full lg:w-7/12 shrink-0">
             <Window />
@@ -112,7 +131,6 @@ export function Projects() {
             <Visualizer />
           </div>
         </div>
-
       </div>
     </ProjectProvider>
   )

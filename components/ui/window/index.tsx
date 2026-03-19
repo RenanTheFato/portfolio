@@ -22,8 +22,8 @@ export function Window() {
     const grid = gridRef.current
     if (!grid) return
 
-    const seen = sessionStorage.getItem(PROJECTS_ITEMS_ANIM_KEY) === "1"
     const items = grid.querySelectorAll('.project-item')
+    const seen = sessionStorage.getItem(PROJECTS_ITEMS_ANIM_KEY) === "1"
 
     if (seen) {
       gsap.set(items, { opacity: 1, y: 0 })
@@ -55,7 +55,11 @@ export function Window() {
       </div>
 
       <div className="relative flex-1 min-h-0">
-        <div ref={mainRef} onScroll={handleScroll} className="h-full overflow-y-auto p-2 sm:p-3 lg:p-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div
+          ref={mainRef}
+          onScroll={handleScroll}
+          className="h-full overflow-y-auto p-2 sm:p-3 lg:p-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
           <div ref={gridRef} className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 lg:gap-4 pt-2">
             {projects.map((project) => (
               <div key={project.title} className="project-item opacity-0">
