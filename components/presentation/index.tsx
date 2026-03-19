@@ -43,7 +43,7 @@ function BurgerMenu() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="lg:hidden flex flex-col justify-center gap-1.25 w-8 h-8 shrink-0"
+        className="lg:hidden flex flex-col justify-center gap-1.5 w-8 h-8 shrink-0"
         aria-label="Open menu"
       >
         <span className="block h-px w-full bg-white" />
@@ -90,7 +90,7 @@ function SkillsSection() {
   ]
 
   return (
-    <div className="mt-7 flex flex-col gap-6 max-w-sm lg:max-w-lg">
+    <div className="mt-7 flex flex-col gap-6 w-full lg:max-w-lg">
       <div className="flex flex-col gap-3">
         <span className="font-brains text-lg lg:text-base text-white font-semibold">
           {t('presentation.skillsTitle')}
@@ -98,8 +98,8 @@ function SkillsSection() {
         <div className="grid grid-cols-2 gap-x-6 lg:gap-x-10 gap-y-3 sm:gap-y-2.5 lg:gap-y-4">
           {HARD_SKILLS.map(({ label, desc }) => (
             <div key={label} className="flex flex-col gap-1 sm:gap-0.5 lg:gap-1">
-              <span className="font-brains text-sm lg:text-sm text-white">{label}</span>
-              <span className="font-brains text-xs lg:text-xs text-white/45">{desc}</span>
+              <span className="font-brains text-sm text-white leading-snug">{label}</span>
+              <span className="font-brains text-xs text-white/45 leading-snug">{desc}</span>
             </div>
           ))}
         </div>
@@ -116,7 +116,7 @@ function SkillsSection() {
             <div key={label} className="flex flex-row items-center gap-2 sm:gap-1.5 lg:gap-2">
               <Icon size={14} className="shrink-0 lg:hidden" style={{ color }} />
               <Icon size={16} className="shrink-0 hidden lg:block" style={{ color }} />
-              <span className="font-brains text-sm lg:text-sm text-white/75">{label}</span>
+              <span className="font-brains text-sm text-white/75">{label}</span>
             </div>
           ))}
         </div>
@@ -173,7 +173,7 @@ export function PresentationSection({ startAnimation, skipAnimation = false, onA
         duration: 0.5,
         onStart: () => {
           const commandLine = document.createElement("div")
-          commandLine.className = "font-brains opacity-0 text-sm lg:text-base sm:text-xs text-justify text-nowrap"
+          commandLine.className = "font-brains opacity-0 whitespace-nowrap"
           commandLine.textContent = command
           bootSequenceRef.current?.appendChild(commandLine)
 
@@ -254,8 +254,12 @@ export function PresentationSection({ startAnimation, skipAnimation = false, onA
 
       {!bootAnimationComplete ? (
         <div className="absolute inset-0 z-50 bg-black flex overflow-hidden">
-          <div className="w-full p-6 px-5 sm:px-12 lg:px-36">
-            <div ref={bootSequenceRef} className="space-y-2" />
+          <div className="w-full p-6 px-5 sm:px-12 lg:px-36 overflow-hidden">
+            <div
+              ref={bootSequenceRef}
+              className="space-y-2"
+              style={{ fontSize: "clamp(9px, 2.4vw, 14px)" }}
+            />
           </div>
         </div>
       ) : (
@@ -264,15 +268,16 @@ export function PresentationSection({ startAnimation, skipAnimation = false, onA
           className="relative z-10 flex flex-col lg:flex-row justify-start lg:justify-between w-full min-h-full px-6 sm:px-10 lg:px-36 py-10 sm:py-10 lg:py-12 gap-8 lg:gap-0"
         >
           <div className="flex flex-col w-full lg:flex-3">
+
             <div className="flex flex-row items-center gap-5 sm:gap-6">
 
-              <div className="fade-avatar opacity-0">
+              <div className="fade-avatar opacity-0 shrink-0">
                 <Image
                   src={"/avatar.png"}
                   alt="profile pic"
                   width={144}
                   height={144}
-                  className="rounded-md w-22 h-22 sm:w-24 sm:h-24 lg:w-36 lg:h-36 shrink-0"
+                  className="rounded-md w-22 h-22 sm:w-24 sm:h-24 lg:w-36 lg:h-36"
                   loading="eager"
                 />
               </div>
@@ -300,11 +305,11 @@ export function PresentationSection({ startAnimation, skipAnimation = false, onA
                     {t('presentation.fullstack')}
                   </span>
                 </div>
-
-                <div className="ml-auto self-start lg:hidden">
-                  <BurgerMenu />
-                </div>
               </section>
+
+              <div className="ml-auto self-start lg:hidden shrink-0">
+                <BurgerMenu />
+              </div>
 
             </div>
 
