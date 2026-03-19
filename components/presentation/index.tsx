@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { MenuItem } from "../ui/menu-main-item";
 
 import {
@@ -11,15 +12,6 @@ import {
 } from "@icons-pack/react-simple-icons";
 import { FaJava } from "react-icons/fa";
 import { InteractiveGrid, InteractiveGridHandle } from "../animations/squares";
-
-const HARD_SKILLS = [
-  { label: "Frontend Development", desc: "SPAs, SSR, component systems" },
-  { label: "Backend Development", desc: "REST, microservices" },
-  { label: "Database Design", desc: "Relational, migrations, ORMs" },
-  { label: "Cloud & DevOps", desc: "Docker, CI/CD, deployments" },
-  { label: "API Architecture", desc: "Design, versioning, contracts" },
-  { label: "System Design", desc: "Scalability, patterns, DDD" },
-]
 
 const LANGUAGES = [
   { icon: SiTypescript, label: "TypeScript", color: "#3178C6" },
@@ -36,10 +28,16 @@ const LANGUAGES = [
   { icon: SiGit, label: "Git", color: "#F05032" },
 ]
 
-const MENU_ITEMS = ["$ Skills", "$ Projects", "$ Certifications", "$ Contact"]
-
 function BurgerMenu() {
+  const t = useTranslations('nav')
   const [open, setOpen] = useState(false)
+
+  const MENU_ITEMS = [
+    t('skills'),
+    t('projects'),
+    t('certifications'),
+    t('contact'),
+  ]
 
   return (
     <>
@@ -80,10 +78,23 @@ function BurgerMenu() {
 }
 
 function SkillsSection() {
+  const t = useTranslations()
+
+  const HARD_SKILLS = [
+    { label: t('skills.frontend.label'), desc: t('skills.frontend.desc') },
+    { label: t('skills.backend.label'),  desc: t('skills.backend.desc') },
+    { label: t('skills.database.label'), desc: t('skills.database.desc') },
+    { label: t('skills.devops.label'),   desc: t('skills.devops.desc') },
+    { label: t('skills.api.label'),      desc: t('skills.api.desc') },
+    { label: t('skills.system.label'),   desc: t('skills.system.desc') },
+  ]
+
   return (
     <div className="mt-7 flex flex-col gap-6 max-w-sm lg:max-w-lg">
       <div className="flex flex-col gap-3">
-        <span className="font-brains text-lg lg:text-base text-white font-semibold">Skills</span>
+        <span className="font-brains text-lg lg:text-base text-white font-semibold">
+          {t('presentation.skillsTitle')}
+        </span>
         <div className="grid grid-cols-2 gap-x-6 lg:gap-x-10 gap-y-3 sm:gap-y-2.5 lg:gap-y-4">
           {HARD_SKILLS.map(({ label, desc }) => (
             <div key={label} className="flex flex-col gap-1 sm:gap-0.5 lg:gap-1">
@@ -97,7 +108,9 @@ function SkillsSection() {
       <div className="h-px w-full bg-white/10" />
 
       <div className="flex flex-col gap-3">
-        <span className="font-brains text-lg lg:text-base text-white font-semibold">Tech Stack</span>
+        <span className="font-brains text-lg lg:text-base text-white font-semibold">
+          {t('presentation.techStack')}
+        </span>
         <div className="grid grid-cols-3 gap-x-4 lg:gap-x-6 gap-y-3 sm:gap-y-2 lg:gap-y-3">
           {LANGUAGES.map(({ icon: Icon, label, color }) => (
             <div key={label} className="flex flex-row items-center gap-2 sm:gap-1.5 lg:gap-2">
@@ -119,11 +132,19 @@ interface PresentationSectionProps {
 }
 
 export function PresentationSection({ startAnimation, skipAnimation = false, onAnimationComplete }: PresentationSectionProps) {
+  const t = useTranslations()
   const containerRef = useRef<HTMLDivElement>(null)
   const bootSequenceRef = useRef<HTMLDivElement>(null)
   const gridRef = useRef<InteractiveGridHandle>(null)
 
   const [bootAnimationComplete, setBootAnimationComplete] = useState(false)
+
+  const MENU_ITEMS = [
+    t('nav.skills'),
+    t('nav.projects'),
+    t('nav.certifications'),
+    t('nav.contact'),
+  ]
 
   const handleMouseMove = (e: React.MouseEvent) => {
     gridRef.current?.setMousePos(e.clientX, e.clientY)
@@ -143,16 +164,7 @@ export function PresentationSection({ startAnimation, skipAnimation = false, onA
     if (skipAnimation) return
     if (bootAnimationComplete || !startAnimation) return
 
-    const bootCommands = [
-      "> Initializing profile session.............. [OK]",
-      "> Loading personal data..................... [OK]",
-      "> Fetching identity......................... [OK]",
-      "> Scanning core skills...................... [OK]",
-      "> Analyzing experience level................ [OK]",
-      "> Mapping interests......................... [OK]",
-      "> Compiling profile summary................. [OK]",
-      "> Presentation module ready................. [OK]",
-    ]
+    const bootCommands = t.raw('boot.lines') as string[]
 
     const bootTimeline = gsap.timeline()
 
@@ -223,16 +235,26 @@ export function PresentationSection({ startAnimation, skipAnimation = false, onA
               />
               <section className="flex flex-col gap-1.5 sm:gap-1 lg:gap-2 min-w-0">
                 <div className="flex flex-row flex-wrap gap-x-2 sm:gap-x-4">
-                  <span className="text-white/40 font-brains text-xs sm:text-sm lg:text-base shrink-0">My Name:</span>
+                  <span className="text-white/40 font-brains text-xs sm:text-sm lg:text-base shrink-0">
+                    {t('presentation.myName')}
+                  </span>
                   <span className="text-white font-brains text-xs sm:text-sm lg:text-base">Renan Santana</span>
                 </div>
                 <div className="flex flex-row flex-wrap gap-x-2 sm:gap-x-4">
-                  <span className="text-white/40 font-brains text-xs sm:text-sm lg:text-base shrink-0">Experience:</span>
-                  <span className="text-white font-brains text-xs sm:text-sm lg:text-base">4 years</span>
+                  <span className="text-white/40 font-brains text-xs sm:text-sm lg:text-base shrink-0">
+                    {t('presentation.experience')}
+                  </span>
+                  <span className="text-white font-brains text-xs sm:text-sm lg:text-base">
+                    {t('presentation.years')}
+                  </span>
                 </div>
                 <div className="flex flex-row flex-wrap gap-x-2 sm:gap-x-4">
-                  <span className="text-white/40 font-brains text-xs sm:text-sm lg:text-base shrink-0">Scope:</span>
-                  <span className="text-white font-brains text-xs sm:text-sm lg:text-base">FullStack</span>
+                  <span className="text-white/40 font-brains text-xs sm:text-sm lg:text-base shrink-0">
+                    {t('presentation.scope')}
+                  </span>
+                  <span className="text-white font-brains text-xs sm:text-sm lg:text-base">
+                    {t('presentation.fullstack')}
+                  </span>
                 </div>
               </section>
 

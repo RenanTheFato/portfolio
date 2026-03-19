@@ -6,17 +6,19 @@ import { Badge } from "../badge"
 import { useCustomScrollbar, ScrollTrack } from "@/utils/scroll"
 import { projects } from "@/data/projects"
 import { useProject } from "@/contexts/project-context"
+import { useTranslations } from "next-intl"
 
 export function Window() {
   const { mainRef, thumbRef, trackRef, handleScroll } = useCustomScrollbar()
   const { setSelected } = useProject()
+  const t = useTranslations('projects')
 
   return (
     <section className="flex flex-col w-full lg:w-7/12 h-84 sm:h-80 lg:h-full border-2 border-white/40 rounded-t-lg shrink-0">
       <div className="w-full h-10 flex items-center flex-row border-b border-b-white/25 rounded-t-2xl shrink-0">
         <VscRootFolder className="mx-3 sm:mx-4" size={20} />
         <div className="w-5/12 sm:w-4/12 lg:w-3/12 bg-gray-100/30 h-full rounded-t-lg flex items-center justify-center">
-          <span className="text-white text-xs sm:text-sm text-nowrap">Project's Folder</span>
+          <span className="text-white text-xs sm:text-sm text-nowrap">{t('folderTab')}</span>
         </div>
       </div>
 
@@ -31,7 +33,7 @@ export function Window() {
                   <Project.Badges>
                     {project.techs.slice(0, 3).map((tech) => (
                       <Badge key={tech.label} color={tech.color}>
-                        <Badge.Icon icon={tech.icon} color={tech.color} iconColor={tech.iconColor}/>
+                        <Badge.Icon icon={tech.icon} color={tech.color} iconColor={tech.iconColor} />
                         <Badge.Title>{tech.label}</Badge.Title>
                       </Badge>
                     ))}

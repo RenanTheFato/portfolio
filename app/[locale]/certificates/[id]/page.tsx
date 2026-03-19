@@ -4,9 +4,10 @@ import Link from "next/link"
 import Image from "next/image"
 import { IoIosArrowBack } from "react-icons/io"
 import { GoArrowUpRight } from "react-icons/go"
+import { getTranslations } from "next-intl/server"
 
 interface PageProps {
-  params: Promise<{ id: string }>
+  params: Promise<{ id: string; locale: string }>
 }
 
 export async function generateStaticParams() {
@@ -14,7 +15,9 @@ export async function generateStaticParams() {
 }
 
 export default async function CertificatePage({ params }: PageProps) {
-  const { id } = await params
+  const { id, locale } = await params
+  const t = await getTranslations('certificate')
+
   const cert = certifications.find((c) => c.credential_id === id)
   if (!cert) notFound()
 
@@ -22,15 +25,15 @@ export default async function CertificatePage({ params }: PageProps) {
     <div className="min-h-screen w-full flex flex-col bg-black text-white">
       <header className="flex items-center justify-between px-6 sm:px-12 py-5 border-b border-white/10">
         <Link
-          href="/"
+          href={`/${locale}`}
           className="flex items-center gap-2 text-white/40 hover:text-white transition-colors duration-200 text-base font-mono"
         >
           <IoIosArrowBack />
-          Back to portfolio
+          {t('backToPortfolio')}
         </Link>
 
         <div className="text-white/70 text-xs uppercase tracking-[0.3em] font-mono">
-          Certificate
+          {t('certificateLabel')}
         </div>
       </header>
 
@@ -83,7 +86,7 @@ export default async function CertificatePage({ params }: PageProps) {
               )}
             </div>
             <div>
-              <p className="text-white/50 text-xs uppercase tracking-[0.3em] font-mono mb-1">Issued by</p>
+              <p className="text-white/50 text-xs uppercase tracking-[0.3em] font-mono mb-1">{t('issuedBy')}</p>
               <p className="text-white/80 text-lg font-medium">{cert.issuing_organization}</p>
             </div>
           </div>
@@ -91,7 +94,7 @@ export default async function CertificatePage({ params }: PageProps) {
           <div className="w-12 h-px bg-linear-to-r from-yellow-400/30 to-transparent" />
 
           <div>
-            <p className="text-white/50 text-xs uppercase tracking-[0.3em] mb-3 font-mono">Certificate</p>
+            <p className="text-white/50 text-xs uppercase tracking-[0.3em] mb-3 font-mono">{t('certificate')}</p>
             <h1 className="text-white text-3xl xl:text-4xl leading-tight">
               {cert.name}
             </h1>
@@ -99,19 +102,19 @@ export default async function CertificatePage({ params }: PageProps) {
 
           {cert.description && cert.description !== cert.issuing_organization && (
             <div>
-              <p className="text-white/40 text-xs uppercase tracking-[0.3em] mb-2 font-mono">About</p>
+              <p className="text-white/40 text-xs uppercase tracking-[0.3em] mb-2 font-mono">{t('about')}</p>
               <p className="text-white/80 text-base leading-relaxed">{cert.description}</p>
             </div>
           )}
 
           <div className="flex flex-col gap-5">
             <div>
-              <p className="text-white/40 text-xs uppercase tracking-[0.3em] mb-1 font-mono">Issue date</p>
+              <p className="text-white/40 text-xs uppercase tracking-[0.3em] mb-1 font-mono">{t('issueDate')}</p>
               <p className="text-white/80 text-base">{cert.issue_date}</p>
             </div>
 
             <div>
-              <p className="text-white/40 text-xs uppercase tracking-[0.3em] mb-1 font-mono">Credential ID</p>
+              <p className="text-white/40 text-xs uppercase tracking-[0.3em] mb-1 font-mono">{t('credentialId')}</p>
               <p className="text-white/70 text-sm font-mono break-all">{cert.credential_id}</p>
             </div>
           </div>
@@ -119,8 +122,8 @@ export default async function CertificatePage({ params }: PageProps) {
           <a className="mt-2 flex items-center justify-center gap-2 w-full py-4 border border-yellow-400/30 text-yellow-300/70 hover:bg-yellow-400/10 hover:text-yellow-200 hover:border-yellow-400/60 transition-all duration-300 rounded-sm text-sm uppercase tracking-widest font-mono"
             href={cert.url} target="_blank" rel="noopener noreferrer"
           >
-            <GoArrowUpRight className="w-6 h-6"/>
-            Verify certificate
+            <GoArrowUpRight className="w-6 h-6" />
+            {t('verify')}
           </a>
         </aside>
       </main>

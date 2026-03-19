@@ -4,14 +4,16 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { CertificationData } from "@/types/certification-data"
 import Image from "next/image"
+import { useLocale } from "next-intl"
 
 export function TrophyCard({ cert, index }: { cert: CertificationData; index: number }) {
   const router = useRouter()
+  const locale = useLocale()
   const [hovered, setHovered] = useState(false)
 
   return (
     <div className="group relative flex flex-col items-center cursor-pointer select-none" style={{ animationDelay: `${index * 80}ms` }}
-      onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} onClick={() => router.push(`/certificates/${cert.credential_id}`)}
+      onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} onClick={() => router.push(`/${locale}/certificates/${cert.credential_id}`)}
     >
       <div className="absolute top-0 w-full h-32 rounded-full blur-3xl transition-all duration-500 pointer-events-none"
         style={{ background: hovered ? "radial-gradient(circle, hsla(45.86, 64.609%, 52.353%, 0.25) 0%, transparent 70%)" : "radial-gradient(circle, hsla(45.86, 64.609%, 52.353%, 0.06) 0%, transparent 70%)" }} 

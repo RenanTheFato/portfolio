@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from "react";
+import { gsap } from "gsap";
 import { PresentationSection } from "@/components/presentation";
 import { Topbar } from "@/components/topbar";
 import { Projects } from "@/components/projects";
@@ -9,6 +10,7 @@ import { Certifications } from "@/components/certifications";
 import { Contact } from "@/components/contact";
 
 const ANIMATION_KEY = "portfolio_intro_done"
+const SCROLL_KEY = "portfolio_scroll_pos"
 
 export default function Home() {
   const [skipAnimation, setSkipAnimation] = useState(false)
@@ -26,6 +28,31 @@ export default function Home() {
     }
     setHydrated(true)
   }, [])
+
+  useEffect(() => {
+    if (!hydrated) return
+
+    const savedScroll = sessionStorage.getItem(SCROLL_KEY)
+    if (!savedScroll) return
+
+    sessionStorage.removeItem(SCROLL_KEY)
+
+    const el = mainRef.current
+    if (!el) return
+
+    const target = Number(savedScroll)
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        el.scrollTop = 0
+        gsap.to(el, {
+          scrollTop: target,
+          duration: 0.8,
+          ease: "power3.out",
+        })
+      })
+    })
+  }, [hydrated])
 
   const canScroll = hydrated && topbarComplete && presentationComplete
 

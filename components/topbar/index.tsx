@@ -1,14 +1,57 @@
 'use client'
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Linkedin from '../../public/linkedin.svg';
 import TextType from "../animations/text-type";
 import { SocialButton } from "../ui/social-button";
 import { SiGithub, SiGmail } from "@icons-pack/react-simple-icons";
+import { useLocale } from "next-intl";
+import { useRouter, usePathname } from "next/navigation";
 
 interface TopbarProps {
   onAnimationComplete?: () => void
   skipAnimation?: boolean
+}
+
+const SCROLL_KEY = "portfolio_scroll_pos"
+
+function LanguageSwitcher() {
+  const currentLocale = useLocale()
+  const router = useRouter()
+  const pathname = usePathname()
+
+  const switchLocale = (newLocale: string) => {
+    const segments = pathname.split('/')
+    segments[1] = newLocale
+    const newPath = segments.join('/')
+
+    const mainEl = document.querySelector('main')
+    const scrollY = mainEl ? mainEl.scrollTop : 0
+    sessionStorage.setItem(SCROLL_KEY, String(scrollY))
+
+    router.replace(newPath, { scroll: false })
+  }
+
+  return (
+    <div className="flex flex-row items-center gap-2 shrink-0">
+      {(['pt', 'en'] as const).map((locale, idx) => (
+        <React.Fragment key={locale}>
+          {idx > 0 && (
+            <span className="text-white/20 font-brains text-xs select-none">|</span>
+          )}
+          <button
+            onClick={() => switchLocale(locale)}
+            className={`font-brains text-xs sm:text-sm transition-colors ${currentLocale === locale
+                ? 'text-white'
+                : 'text-white/30 hover:text-white/60'
+              }`}
+          >
+            {locale.toUpperCase()}
+          </button>
+        </React.Fragment>
+      ))}
+    </div>
+  )
 }
 
 export function Topbar({ onAnimationComplete, skipAnimation = false }: TopbarProps) {
@@ -55,24 +98,30 @@ export function Topbar({ onAnimationComplete, skipAnimation = false }: TopbarPro
         ))}
       </span>
 
-      <div className="flex flex-row items-center gap-1.5 sm:gap-2 lg:gap-3 shrink-0">
-        <SocialButton.Root href="https://www.linkedin.com/in/renan-santana007">
-          <SocialButton.Background className="bg-linear-to-r from-blue-400 to-blue-800" />
-          <SocialButton.Icon icon={Linkedin} text="LinkedIn" isSvg={true} />
-          <SocialButton.Text>LinkedIn</SocialButton.Text>
-        </SocialButton.Root>
+      <div className="flex flex-row items-center gap-2 sm:gap-3 lg:gap-4 shrink-0">
+        <LanguageSwitcher />
 
-        <SocialButton.Root href="https://github.com/RenanTheFato">
-          <SocialButton.Background className="bg-linear-to-r from-gray-400 to-white" />
-          <SocialButton.Icon icon={SiGithub} text="GitHub" isSvg={false} iconClassName="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-black transition-colors" />
-          <SocialButton.Text className="text-white group-hover:text-black transition-colors">GitHub</SocialButton.Text>
-        </SocialButton.Root>
+        <div className="h-4 w-px bg-white/20 hidden sm:block" />
 
-        <SocialButton.Root href="mailto:renan.thefato.dev@gmail.com">
-          <SocialButton.Background className="bg-linear-to-r from-red-800 to-red-950" />
-          <SocialButton.Icon icon={SiGmail} text="Gmail" isSvg={false} iconClassName="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-          <SocialButton.Text>Email</SocialButton.Text>
-        </SocialButton.Root>
+        <div className="flex flex-row items-center gap-1.5 sm:gap-2 lg:gap-3">
+          <SocialButton.Root href="https://www.linkedin.com/in/renan-santana007">
+            <SocialButton.Background className="bg-linear-to-r from-blue-400 to-blue-800" />
+            <SocialButton.Icon icon={Linkedin} text="LinkedIn" isSvg={true} />
+            <SocialButton.Text>LinkedIn</SocialButton.Text>
+          </SocialButton.Root>
+
+          <SocialButton.Root href="https://github.com/RenanTheFato">
+            <SocialButton.Background className="bg-linear-to-r from-gray-400 to-white" />
+            <SocialButton.Icon icon={SiGithub} text="GitHub" isSvg={false} iconClassName="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-black transition-colors" />
+            <SocialButton.Text className="text-white group-hover:text-black transition-colors">GitHub</SocialButton.Text>
+          </SocialButton.Root>
+
+          <SocialButton.Root href="mailto:renan.thefato.dev@gmail.com">
+            <SocialButton.Background className="bg-linear-to-r from-red-800 to-red-950" />
+            <SocialButton.Icon icon={SiGmail} text="Gmail" isSvg={false} iconClassName="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+            <SocialButton.Text>Email</SocialButton.Text>
+          </SocialButton.Root>
+        </div>
       </div>
     </header>
   )
