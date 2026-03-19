@@ -54,7 +54,28 @@ export default function Home() {
     })
   }, [hydrated])
 
+
   const canScroll = hydrated && topbarComplete && presentationComplete
+
+  useEffect(() => {
+    if (!canScroll) return
+    const el = mainRef.current
+    if (!el) return
+
+    const handleWheel = (e: WheelEvent) => {
+      e.preventDefault()
+      const step = Math.sign(e.deltaY) * Math.min(Math.abs(e.deltaY), 100)
+      gsap.to(el, {
+        scrollTop: Math.max(0, Math.min(el.scrollTop + step, el.scrollHeight - el.clientHeight)),
+        duration: 0.35,
+        ease: "power2.out",
+        overwrite: true,
+      })
+    }
+
+    el.addEventListener("wheel", handleWheel, { passive: false })
+    return () => el.removeEventListener("wheel", handleWheel)
+  }, [canScroll])
 
   const handleAnimationComplete = () => {
     sessionStorage.setItem(ANIMATION_KEY, "1")
