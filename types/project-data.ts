@@ -20,6 +20,7 @@ export interface ExternalLinks {
 export interface ProjectData {
   title: string
   image: string
+  translationKey: string,
   alt: string
   description: string
   focus: "frontend" | "backend" | "fullstack"
