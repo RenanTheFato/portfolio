@@ -278,7 +278,7 @@ export function PresentationSection({ startAnimation, skipAnimation = false, onA
                   width={144}
                   height={144}
                   className="rounded-md w-22 h-22 sm:w-24 sm:h-24 lg:w-36 lg:h-36"
-                  loading="eager"
+                  loading="lazy"
                 />
               </div>
 

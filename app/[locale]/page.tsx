@@ -64,10 +64,10 @@ export default function Home() {
 
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault()
-      const step = Math.sign(e.deltaY) * Math.min(Math.abs(e.deltaY), 110)
+      const step = Math.sign(e.deltaY) * Math.min(Math.abs(e.deltaY), 120)
       gsap.to(el, {
         scrollTop: Math.max(0, Math.min(el.scrollTop + step, el.scrollHeight - el.clientHeight)),
-        duration: 0.35,
+        duration: 0.25,
         ease: "power2.out",
         overwrite: true,
       })

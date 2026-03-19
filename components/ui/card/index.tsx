@@ -34,6 +34,7 @@ export function TrophyCard({ cert, index }: { cert: CertificationData; index: nu
               sizes="360px"
               quality={95}
               className="object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+              loading="lazy"
             />
           ) : (
             <div className="w-full h-full flex flex-col items-center justify-center gap-3 p-4">
@@ -46,6 +47,7 @@ export function TrophyCard({ cert, index }: { cert: CertificationData; index: nu
                     height={64}
                     quality={95}
                     className="object-contain"
+                    loading="lazy"
                   />
                 ) : (
                   <span className="text-yellow-400 text-xl font-bold">{cert.issuing_organization[0]}</span>
@@ -77,6 +79,7 @@ export function TrophyCard({ cert, index }: { cert: CertificationData; index: nu
               height={64}
               quality={100}
               className="object-contain"
+              loading="lazy"
             />
           ) : (
             <span className="text-white/50 text-base font-bold">{cert.issuing_organization[0]}</span>

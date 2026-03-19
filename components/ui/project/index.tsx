@@ -41,6 +41,7 @@ function ProjectImage({ src, alt }: ProjectImageProps) {
         fill
         sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
         className="object-cover"
+        loading="lazy"
       />
     </div>
   )
