@@ -60,9 +60,9 @@ export function Window() {
           onScroll={handleScroll}
           className="h-full overflow-y-auto p-2 sm:p-3 lg:p-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
-          <div ref={gridRef} className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 lg:gap-4 pt-2">
+          <div ref={gridRef} className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 lg:gap-4 pt-2 items-stretch">
             {projects.map((project) => (
-              <div key={project.title} className="project-item opacity-0">
+              <div key={project.title} className="project-item opacity-0 flex">
                 <Project onClick={() => setSelected(project)}>
                   <Project.Image src={project.image} alt={project.alt} />
                   <Project.Content>
