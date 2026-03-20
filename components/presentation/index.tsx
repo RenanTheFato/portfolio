@@ -33,10 +33,10 @@ function BurgerMenu() {
   const [open, setOpen] = useState(false)
 
   const MENU_ITEMS = [
-    t('skills'),
-    t('projects'),
-    t('certifications'),
-    t('contact'),
+    { label: t('skills'),         sectionId: "skills" },
+    { label: t('projects'),       sectionId: "projects" },
+    { label: t('certifications'), sectionId: "certifications" },
+    { label: t('contact'),        sectionId: "contact" },
   ]
 
   return (
@@ -67,8 +67,8 @@ function BurgerMenu() {
             >
               ✕
             </button>
-            {MENU_ITEMS.map((label) => (
-              <MenuItem key={label} label={label} />
+            {MENU_ITEMS.map(({ label, sectionId }) => (
+              <MenuItem key={label} label={label} sectionId={sectionId} onNavigate={() => setOpen(false)} />
             ))}
           </div>
         </div>
@@ -141,10 +141,10 @@ export function PresentationSection({ startAnimation, skipAnimation = false, onA
   const [bootAnimationComplete, setBootAnimationComplete] = useState(false)
 
   const MENU_ITEMS = [
-    t('nav.skills'),
-    t('nav.projects'),
-    t('nav.certifications'),
-    t('nav.contact'),
+    { label: t('nav.skills'), sectionId: "skills" },
+    { label: t('nav.projects'), sectionId: "projects" },
+    { label: t('nav.certifications'), sectionId: "certifications" },
+    { label: t('nav.contact'), sectionId: "contact" },
   ]
 
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -320,8 +320,8 @@ export function PresentationSection({ startAnimation, skipAnimation = false, onA
 
           <div className="fade-menu opacity-0 hidden lg:flex flex-col flex-1">
             <section className="flex flex-col gap-6">
-              {MENU_ITEMS.map((label) => (
-                <MenuItem key={label} label={label} />
+              {MENU_ITEMS.map(({ label, sectionId }) => (
+                <MenuItem key={label} label={label} sectionId={sectionId} />
               ))}
             </section>
           </div>

@@ -1,17 +1,21 @@
 'use client'
 
+import { useScrollNav } from "@/contexts/scroll-nav-context";
 import { gsap } from "gsap";
 import { useLayoutEffect, useRef } from "react";
 
 interface MenuItemProps {
   label: string
+  sectionId?: string
+  onNavigate?: () => void
 }
 
-export function MenuItem({ label }: MenuItemProps) {
+export function MenuItem({ label, sectionId, onNavigate }: MenuItemProps) {
   const itemRef = useRef<HTMLDivElement>(null)
   const solidBgRef = useRef<HTMLDivElement>(null)
   const pixelColumnsRef = useRef<HTMLDivElement[]>([])
   const timelineRef = useRef<gsap.core.Timeline | null>(null)
+  const { scrollToSection, scrollToTop } = useScrollNav()
 
   useLayoutEffect(() => {
     const timeline = gsap.timeline({ paused: true })
@@ -50,6 +54,15 @@ export function MenuItem({ label }: MenuItemProps) {
     if (timelineRef.current) timelineRef.current.reverse()
   }
 
+  function handleClick() {
+    if (!sectionId || sectionId === "skills") {
+      scrollToTop()
+    } else {
+      scrollToSection(sectionId)
+    }
+    onNavigate?.()
+  }
+
   function createPixelColumns() {
     const col = []
     const numCols = 16
@@ -74,7 +87,8 @@ export function MenuItem({ label }: MenuItemProps) {
       ref={itemRef}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className=" relative border border-white rounded-sm cursor-pointer overflow-hidden px-2 py-2.5 sm:py-3 lg:py-4 min-w-25 sm:min-w-30">
+      onClick={handleClick}
+      className="relative border border-white rounded-sm cursor-pointer overflow-hidden px-2 py-2.5 sm:py-3 lg:py-4 min-w-25 sm:min-w-30">
 
       <div ref={solidBgRef} className="absolute inset-0 bg-white" style={{ transform: 'scaleX(0)', transformOrigin: 'left' }} />
 

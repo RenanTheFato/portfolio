@@ -8,7 +8,7 @@ import { useTranslations } from "next-intl"
 
 const CERTS_ANIM_KEY = "portfolio_certs_anim_done"
 
-export function Certifications() {
+export function Certifications({ id }: { id?: string }) {
   const t = useTranslations('certifications')
   const containerRef = useRef<HTMLDivElement>(null)
   const titleRef = useRef<HTMLDivElement>(null)
@@ -113,6 +113,7 @@ export function Certifications() {
       ref={containerRef}
       className="relative w-full flex flex-col p-4 sm:p-6 lg:p-8 lg:px-24 gap-8 bg-black border-t border-t-white/30 overflow-hidden"
       style={{ minHeight: 'calc(100vh - 57px)' }}
+      id={id}
     >
       <div
         className="absolute inset-0 pointer-events-none z-0"

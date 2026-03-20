@@ -8,7 +8,7 @@ import { ProjectProvider } from "@/contexts/project-context"
 
 const PROJECTS_ANIM_KEY = "portfolio_projects_anim_done"
 
-export function Projects() {
+export function Projects({ id }: { id?: string }) {
   const containerRef = useRef<HTMLDivElement>(null)
   const lidRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
@@ -82,7 +82,7 @@ export function Projects() {
 
   return (
     <ProjectProvider>
-      <div ref={containerRef} className="relative w-full h-full bg-black border-t border-t-white/30">
+      <div ref={containerRef} className="relative w-full h-full bg-black border-t border-t-white/30" id={id}>
         <div
           ref={lidRef}
           className="absolute inset-0 z-20 pointer-events-none"

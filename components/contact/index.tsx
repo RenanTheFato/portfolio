@@ -53,7 +53,7 @@ function createThunder(container: HTMLDivElement) {
   return { canvas, cells, cols, rows }
 }
 
-export function Contact() {
+export function Contact({ id }: { id?: string }) {
   const t = useTranslations('contact')
   const containerRef = useRef<HTMLDivElement>(null)
   const blackoutRef = useRef<HTMLDivElement>(null)
@@ -181,7 +181,7 @@ export function Contact() {
           }, "-=0.7")
         })
       },
-      { threshold: 0.15 }
+      { threshold: 0.50 }
     )
 
     observer.observe(container)
@@ -195,6 +195,7 @@ export function Contact() {
       ref={containerRef}
       className="relative w-full flex flex-col p-6 sm:p-12 lg:p-16 lg:px-36 border-t border-t-white/30 overflow-hidden"
       style={{ minHeight: "calc(100vh - 57px)" }}
+      id={id}
     >
       <div
         ref={blackoutRef}

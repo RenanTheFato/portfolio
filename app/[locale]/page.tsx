@@ -8,6 +8,7 @@ import { Projects } from "@/components/projects";
 import { useCustomScrollbar, ScrollTrack } from "@/utils/scroll";
 import { Certifications } from "@/components/certifications";
 import { Contact } from "@/components/contact";
+import { ScrollNavProvider } from "@/contexts/scroll-nav-context";
 
 const ANIMATION_KEY = "portfolio_intro_done"
 const SCROLL_KEY = "portfolio_scroll_pos"
@@ -54,7 +55,6 @@ export default function Home() {
     })
   }, [hydrated])
 
-
   const canScroll = hydrated && topbarComplete && presentationComplete
 
   useEffect(() => {
@@ -85,21 +85,23 @@ export default function Home() {
   if (!hydrated) return null
 
   return (
-    <div className="w-screen h-screen flex flex-col">
-      <Topbar skipAnimation={skipAnimation} onAnimationComplete={() => setTopbarComplete(true)} />
+    <ScrollNavProvider mainRef={mainRef}>
+      <div className="w-screen h-screen flex flex-col">
+        <Topbar skipAnimation={skipAnimation} onAnimationComplete={() => setTopbarComplete(true)} />
 
-      <div className="relative flex-1 overflow-hidden">
-        <ScrollTrack trackRef={trackRef} thumbRef={thumbRef} />
+        <div className="relative flex-1 overflow-hidden">
+          <ScrollTrack trackRef={trackRef} thumbRef={thumbRef} />
 
-        <main ref={mainRef} onScroll={handleScroll} className={`h-full ${canScroll ? "overflow-y-scroll" : "overflow-hidden"}`} style={{ scrollbarWidth: "none" }}>
-          <style>{`main::-webkit-scrollbar { display: none; }`}</style>
+          <main ref={mainRef} onScroll={handleScroll} className={`h-full ${canScroll ? "overflow-y-scroll" : "overflow-hidden"}`} style={{ scrollbarWidth: "none" }}>
+            <style>{`main::-webkit-scrollbar { display: none; }`}</style>
 
-          <PresentationSection startAnimation={topbarComplete} skipAnimation={skipAnimation} onAnimationComplete={handleAnimationComplete} />
-          <Projects />
-          <Certifications />
-          <Contact />
-        </main>
+            <PresentationSection startAnimation={topbarComplete} skipAnimation={skipAnimation} onAnimationComplete={handleAnimationComplete} />
+            <Projects id="projects" />
+            <Certifications id="certifications" />
+            <Contact id="contact" />
+          </main>
+        </div>
       </div>
-    </div>
+    </ScrollNavProvider>
   )
 }
